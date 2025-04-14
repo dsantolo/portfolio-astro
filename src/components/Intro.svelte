@@ -3,6 +3,7 @@
 	import { cn } from '../utils.ts';
 	import { animate, stagger, JSAnimation } from 'animejs';
 
+	let isMounted = $state(false);
 	let isTechStackOpen = $state(false);
 	let selected: string = $state('');
 
@@ -30,6 +31,8 @@
 	};
 
 	onMount(() => {
+		isMounted = true;
+
 		// Animations
 
 		// Intro:
@@ -69,7 +72,9 @@
 	>
 {/snippet}
 
-<div class="flex h-screen w-screen flex-col items-center bg-black">
+<div
+	class={cn('flex h-screen w-screen flex-col items-center bg-black', { 'opacity-0': !isMounted })}
+>
 	<button
 		class="absolute top-0 right-0 cursor-pointer p-4 text-gray-200"
 		onclick={onReplayButtonClick}>REPLAY</button
