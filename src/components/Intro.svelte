@@ -96,17 +96,17 @@
 		>
 			<span class="flex flex-col items-center gap-1.5">
 				<span
-					class={cn('h-1 w-8 origin-center rounded-full bg-white transition-transform', {
+					class={cn('h-1 w-8 origin-center rounded-full bg-gray-700 transition-transform', {
 						'translate-y-2.5 rotate-z-42': isTechStackOpen
 					})}
 				></span>
 				<span
-					class={cn('h-1 w-8 rounded-full bg-white transition-opacity', {
+					class={cn('h-1 w-8 rounded-full bg-gray-700 transition-opacity', {
 						'opacity-0': isTechStackOpen
 					})}
 				></span>
 				<span
-					class={cn('h-1 w-8 origin-center rounded-full bg-white transition-transform', {
+					class={cn('h-1 w-8 origin-center rounded-full bg-gray-700 transition-transform', {
 						'-translate-y-2.5 -rotate-z-42': isTechStackOpen
 					})}
 				></span>
