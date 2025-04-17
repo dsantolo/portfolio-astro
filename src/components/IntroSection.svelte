@@ -14,7 +14,7 @@
 
 <section
 	class={cn(
-		'intro-section w-full border-y-2 border-gray-700 bg-gradient-to-br from-red-950 to-transparent to-75% text-white',
+		'intro-section min-h-[25vh] w-full border-y-2 border-gray-700 bg-gradient-to-br from-red-950 to-transparent to-75% text-white',
 		className
 	)}
 >

@@ -82,7 +82,7 @@
 	})}
 >
 	<button
-		class="hover:scale- absolute top-0 right-0 m-4 size-7 origin-top-right cursor-pointer rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform hover:scale-200"
+		class="absolute top-0 right-0 m-4 size-7 origin-top-right cursor-pointer rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform hover:scale-200"
 		onclick={onReplayButtonClick}
 		aria-label="Replay"
 		><svg
@@ -105,27 +105,23 @@
 		</svg>
 	</button>
 	<main class="flex flex-col items-center justify-evenly text-gray-700">
-		<div class="flex h-screen flex-col items-center justify-evenly">
-			<div class="flex h-full flex-col justify-center py-12">
-				<h1 class="h-[25vh] text-5xl transition-colors hover:text-white md:text-9xl">
-					Derek Santolo
-				</h1>
-				<ul class="flex h-full w-full flex-col justify-around md:h-auto md:flex-row">
-					{#each ['Software', 'Music', 'Gaming', 'Blog'] as title}
-						{@render IntroLink(title)}
-					{/each}
-				</ul>
-			</div>
-			<h2 id="coming-soon" class="flex flex-col justify-center py-24 text-gray-100 opacity-0">
+		<div class="flex h-[75vh] flex-col items-center justify-center py-8 md:justify-evenly md:py-2">
+			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
+			<ul class="flex h-full w-full flex-col justify-around md:h-auto md:flex-row">
+				{#each ['Software', 'Music', 'Gaming', 'Blog'] as title}
+					{@render IntroLink(title)}
+				{/each}
+			</ul>
+			<h2 id="coming-soon" class="flex flex-col justify-center text-gray-100 opacity-0">
 				Coming Soon
 			</h2>
-			<IntroSection
-				heading={'Frontend'}
-				body={"I was a frontend developer at  for three years. Here I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. Last year, I rebuilt the website for USC\'s Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4."}
-				date={'2019-2025'}
-				entities={'Pepperdine, , USC'}
-			/>
 		</div>
+		<IntroSection
+			heading={'Frontend'}
+			body={"I was a frontend developer at  for three years. Here I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. Last year, I rebuilt the website for USC\'s Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4."}
+			date={'2019-2025'}
+			entities={'Pepperdine, , USC'}
+		/>
 		<IntroSection
 			heading={'Graphics'}
 			body={'I am currently attending USC pursuing an M.S. in Computer Science, primarily to learn more about game development and computer graphics. Additionally, I am reading \"Metal by Tutorial\" by Caroline Begbie. I hope to produce some Metal demos soon!'}
