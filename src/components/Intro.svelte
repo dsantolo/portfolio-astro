@@ -43,7 +43,7 @@
 			y: { from: '25vh', ease: 'outQuad' }
 		});
 		introNavFadeAnim = animate('.introlink, .intro-section', {
-			delay: stagger(400, { start: introDelay }),
+			delay: stagger(400, { start: introDelay + 1000 }),
 			opacity: [0, 1]
 		});
 		introAnimations = [introHeaderAnim, introNavFadeAnim];
@@ -122,7 +122,8 @@
 			<IntroSection
 				heading={'Frontend'}
 				body={"I was a frontend developer at  for three years. Here I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. Last year, I rebuilt the website for USC\'s Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4."}
-				date={'2021-2024'}
+				date={'2019-2025'}
+				entities={'Pepperdine, , USC'}
 			/>
 		</div>
 		<IntroSection
@@ -130,6 +131,7 @@
 			body={'I am currently attending USC pursuing an M.S. in Computer Science, primarily to learn more about game development and computer graphics. Additionally, I am reading \"Metal by Tutorial\" by Caroline Begbie. I hope to produce some Metal demos soon!'}
 			date={'2024-2025'}
 			className="from-purple-950 mt-48"
+			entities={'USC'}
 		/>
 		<!-- Tech stack menu -->
 		<!-- <button
