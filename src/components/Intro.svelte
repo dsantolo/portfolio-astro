@@ -1,11 +1,12 @@
 <script lang="ts">
+	import IntroSection from './IntroSection.svelte';
 	import { onMount } from 'svelte';
-	import { cn } from '../utils.ts';
 	import { animate, stagger, JSAnimation } from 'animejs';
+	import { cn } from '../utils.ts';
 
 	let isMounted = $state(false);
 	let isTechStackOpen = $state(false);
-	let selected: string = $state('');
+	let selected: string = $state('Software');
 
 	// Declare animations:
 	let comingSoonAnimation: JSAnimation;
@@ -19,8 +20,9 @@
 	const onIntroLinkClick = (title: string) => {
 		selected = title;
 
-		if (selected !== '') {
+		if (selected !== 'Software') {
 			comingSoonAnimation.restart();
+			selected = 'Software';
 		}
 	};
 
@@ -40,7 +42,7 @@
 			delay: introDelay,
 			y: { from: '25vh', ease: 'outQuad' }
 		});
-		introNavFadeAnim = animate('.introlink, #tech-stack-menu', {
+		introNavFadeAnim = animate('.introlink, .intro-section', {
 			delay: stagger(400, { start: introDelay }),
 			opacity: [0, 1]
 		});
@@ -63,7 +65,9 @@
 
 {#snippet IntroLink(title: string)}
 	<button
-		class="introlink cursor-pointer transition-colors hover:text-white"
+		class={cn('introlink cursor-pointer text-xl transition-colors hover:text-white', {
+			'text-white': selected === title
+		})}
 		onclick={() => {
 			onIntroLinkClick(title);
 		}}
@@ -73,22 +77,62 @@
 {/snippet}
 
 <div
-	class={cn('flex h-screen w-screen flex-col items-center bg-black', { 'opacity-0': !isMounted })}
+	class={cn({
+		'opacity-0': !isMounted
+	})}
 >
 	<button
-		class="absolute top-0 right-0 cursor-pointer p-4 text-gray-200"
-		onclick={onReplayButtonClick}>REPLAY</button
-	>
-	<main class="flex size-full flex-col items-center justify-evenly px-12 text-gray-700">
-		<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
-		<ul class="flex w-full max-w-[980px] justify-around">
-			{#each ['Software', 'Music', 'Gaming', 'Blog'] as title}
-				{@render IntroLink(title)}
-			{/each}
-		</ul>
-		<h3 id="coming-soon" class="top-12 text-gray-100 opacity-0">Coming Soon</h3>
+		class="hover:scale- absolute top-0 right-0 m-4 size-7 origin-top-right cursor-pointer rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform hover:scale-200"
+		onclick={onReplayButtonClick}
+		aria-label="Replay"
+		><svg
+			class="fill-gray-700 hover:fill-white"
+			version="1.1"
+			id="Capa_1"
+			xmlns="http://www.w3.org/2000/svg"
+			xmlns:xlink="http://www.w3.org/1999/xlink"
+			viewBox="0 0 74.999 74.999"
+			xml:space="preserve"
+		>
+			<g>
+				<path
+					d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006
+				c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28
+				c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5
+				C-0.002,55.981,15.03,71.013,33.511,71.013z"
+				/>
+			</g>
+		</svg>
+	</button>
+	<main class="flex flex-col items-center justify-evenly text-gray-700">
+		<div class="flex h-screen flex-col items-center justify-evenly">
+			<div class="flex h-full flex-col justify-center py-12">
+				<h1 class="h-[25vh] text-5xl transition-colors hover:text-white md:text-9xl">
+					Derek Santolo
+				</h1>
+				<ul class="flex h-full w-full flex-col justify-around md:h-auto md:flex-row">
+					{#each ['Software', 'Music', 'Gaming', 'Blog'] as title}
+						{@render IntroLink(title)}
+					{/each}
+				</ul>
+			</div>
+			<h2 id="coming-soon" class="flex flex-col justify-center py-24 text-gray-100 opacity-0">
+				Coming Soon
+			</h2>
+			<IntroSection
+				heading={'Frontend'}
+				body={"I was a frontend developer at  for three years. Here I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. Last year, I rebuilt the website for USC\'s Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4."}
+				date={'2021-2024'}
+			/>
+		</div>
+		<IntroSection
+			heading={'Graphics'}
+			body={'I am currently attending USC pursuing an M.S. in Computer Science, primarily to learn more about game development and computer graphics. Additionally, I am reading \"Metal by Tutorial\" by Caroline Begbie. I hope to produce some Metal demos soon!'}
+			date={'2024-2025'}
+			className="from-purple-950 mt-48"
+		/>
 		<!-- Tech stack menu -->
-		<button
+		<!-- <button
 			id="tech-stack-menu"
 			class="cursor-pointer"
 			aria-label="Open Tech Stack Menu"
@@ -111,9 +155,9 @@
 					})}
 				></span>
 			</span>
-		</button>
+		</button> -->
 	</main>
 	<footer class="text-gray-700 blur-xl transition-all duration-500 hover:blur-none">
-		And despite all that...can we really leave the good left undone?
+		And despite all that...we still shouldn't leave the good undone.
 	</footer>
 </div>

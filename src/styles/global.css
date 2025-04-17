@@ -1,10 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import 'tailwindcss';
 
 @theme {
-    --font-sans: "Inter", sans-serif;
+	--font-sans: 'Inter', sans-serif;
+	--font-twoweekend: 'Two Weekend Go';
+}
+
+@layer base {
+	@font-face {
+		font-family: 'Two Weekend Go';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url(../../fonts/twoweekendgo-semibold.otf) format('opentype');
+	}
 }
 
 :root {
-    background-color: black;
+	background-color: black;
+}
+
+/* Gradients */
+.bg-gradient-button {
+	background-image: linear-gradient(to right, white, black);
 }
