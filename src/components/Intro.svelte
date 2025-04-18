@@ -14,7 +14,7 @@
 	let introNavFadeAnim: JSAnimation;
 	let introAnimations: JSAnimation[];
 
-	const introDelay = 1000;
+	const introDelay = 200;
 
 	// Event handlers:
 	const onIntroLinkClick = (title: string) => {
@@ -43,7 +43,7 @@
 			y: { from: '25vh', ease: 'outQuad' }
 		});
 		introNavFadeAnim = animate('.introlink, .intro-section', {
-			delay: stagger(400, { start: introDelay + 1000 }),
+			delay: stagger(250, { start: introDelay + 200 }),
 			opacity: [0, 1]
 		});
 		introAnimations = [introHeaderAnim, introNavFadeAnim];
