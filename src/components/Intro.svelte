@@ -14,7 +14,9 @@
 	let introNavFadeAnim: JSAnimation;
 	let introAnimations: JSAnimation[];
 
+	const introLinkTitles = ['Software', 'Music', 'Gaming', 'Blog'];
 	const introDelay = 200;
+	const introHeaderAnimDuration = 400;
 
 	// Event handlers:
 	const onIntroLinkClick = (title: string) => {
@@ -40,10 +42,12 @@
 		// Intro:
 		introHeaderAnim = animate('h1', {
 			delay: introDelay,
-			y: { from: '25vh', ease: 'outQuad' }
+			duration: introHeaderAnimDuration,
+			y: { from: '25vh', ease: 'outQuad' },
+			ease: 'inOutQuad'
 		});
 		introNavFadeAnim = animate('.introlink, .intro-section', {
-			delay: stagger(250, { start: introDelay + 200 }),
+			delay: stagger(250, { start: introDelay + introHeaderAnimDuration }),
 			opacity: [0, 1]
 		});
 		introAnimations = [introHeaderAnim, introNavFadeAnim];
@@ -65,9 +69,12 @@
 
 {#snippet IntroLink(title: string)}
 	<button
-		class={cn('introlink cursor-pointer text-xl transition-colors hover:text-white', {
-			'text-white': selected === title
-		})}
+		class={cn(
+			'introlink w-36 cursor-pointer rounded-2xl border-2 border-gray-700 bg-linear-to-br from-black from-50% to-white/50 px-2 text-xl text-white opacity-50 transition-colors duration-300 hover:border-white hover:to-white hover:text-white',
+			{
+				'border-gray-700/50 text-white/50': selected !== title
+			}
+		)}
 		onclick={() => {
 			onIntroLinkClick(title);
 		}}
@@ -76,13 +83,24 @@
 	>
 {/snippet}
 
+{#snippet genericDescription(classes: string, descriptionText: string)}
+	<p
+		class={cn(
+			'z-50  max-w-[620px] rounded-2xl border-2 border-gray-700 bg-linear-to-br from-gray-950 from-75% to-stone-950 p-4',
+			classes
+		)}
+	>
+		{descriptionText}
+	</p>
+{/snippet}
+
 <div
 	class={cn({
 		'opacity-0': !isMounted
 	})}
 >
 	<button
-		class="absolute top-0 right-0 m-4 size-7 origin-top-right cursor-pointer rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform hover:scale-200"
+		class="absolute top-0 right-0 m-4 size-7 origin-top-right rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform hover:scale-200"
 		onclick={onReplayButtonClick}
 		aria-label="Replay"
 		><svg
@@ -107,8 +125,8 @@
 	<main class="flex flex-col items-center justify-evenly text-gray-700">
 		<div class="flex h-[75vh] flex-col items-center justify-center py-8 md:justify-evenly md:py-2">
 			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
-			<ul class="flex h-full w-full flex-col justify-around md:h-auto md:flex-row">
-				{#each ['Software', 'Music', 'Gaming', 'Blog'] as title}
+			<ul class="flex size-full flex-col items-center justify-around md:h-auto md:flex-row">
+				{#each introLinkTitles as title}
 					{@render IntroLink(title)}
 				{/each}
 			</ul>
@@ -118,17 +136,25 @@
 		</div>
 		<IntroSection
 			heading={'Frontend'}
-			body={"I was a frontend developer at  for three years. Here I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. Last year, I rebuilt the website for USC\'s Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4."}
 			date={'2019-2025'}
 			entities={'Pepperdine, , USC'}
-		/>
-		<IntroSection
-			heading={'Graphics'}
-			body={'I am currently attending USC pursuing an M.S. in Computer Science, primarily to learn more about game development and computer graphics. Additionally, I am reading \"Metal by Tutorial\" by Caroline Begbie. I hope to produce some Metal demos soon!'}
-			date={'2024-2025'}
-			className="from-purple-950 mt-48"
-			entities={'USC'}
-		/>
+			classes="from-red-950"
+		>
+			{#snippet description()}
+				{@render genericDescription(
+					'to-red-950',
+					`I was a frontend developer at  for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages that served millions of customers. Last year, I rebuilt the website for USC's Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4.`
+				)}
+			{/snippet}
+		</IntroSection>
+		<IntroSection heading={'Graphics'} date={'2024-2025'} entities={'USC'} classes="from-cyan-950">
+			{#snippet description()}
+				{@render genericDescription(
+					'to-cyan-950',
+					'I am currently attending USC pursuing an M.S. in Computer Science, primarily to learn more about game development and computer graphics. I\'ve taken courses like Game Engine Development, Computer Graphics, and Computer Animation and Simulation. Additionally, I am reading "Metal by Tutorial" by Caroline Begbie to teach myself Metal. I hope to produce some Metal demos soon!'
+				)}
+			{/snippet}
+		</IntroSection>
 		<!-- Tech stack menu -->
 		<!-- <button
 			id="tech-stack-menu"
