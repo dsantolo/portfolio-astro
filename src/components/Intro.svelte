@@ -179,7 +179,12 @@
 			</span>
 		</button> -->
 	</main>
-	<footer class="text-gray-700 blur-xl transition-all duration-500 hover:blur-none">
+	<footer
+		class="w-full border-b text-center text-gray-700 blur-xl transition-all duration-500 hover:blur-none"
+	>
 		And despite all that...we still shouldn't leave the good undone.
 	</footer>
+	<div
+		class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent group-hover:scale-x-150"
+	></div>
 </div>
