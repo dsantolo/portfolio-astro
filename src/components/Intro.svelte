@@ -59,10 +59,7 @@
 			loopDelay: 50,
 			duration: 500,
 			ease: 'outQuad',
-			// delay: 250,
 			autoplay: false
-			// onBegin: (self) => (isIntroAnimationPlaying = true),
-			// onComplete: (self) => (isIntroAnimationPlaying = false),
 		});
 	});
 </script>
@@ -70,9 +67,10 @@
 {#snippet IntroLink(title: string)}
 	<button
 		class={cn(
-			'introlink w-36 cursor-pointer rounded-2xl border-2 border-gray-700 bg-linear-to-br from-black from-50% to-white/50 px-2 text-xl text-white opacity-50 transition-colors duration-300 hover:border-white hover:to-white hover:text-white',
+			'introlink w-36 rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white',
 			{
-				'border-gray-700/50 text-white/50': selected !== title
+				'to-white text-white': selected == title,
+				'to-white/50 text-white/50': selected !== title
 			}
 		)}
 		onclick={() => {
@@ -90,7 +88,7 @@
 			classes
 		)}
 	>
-		{descriptionText}
+		{@html descriptionText}
 	</p>
 {/snippet}
 
@@ -143,7 +141,7 @@
 			{#snippet description()}
 				{@render genericDescription(
 					'to-red-950',
-					`I was a frontend developer at  for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages that served millions of customers. Last year, I rebuilt the website for USC's Mobile and Environmental Media Lab using Astro, Svelte 5 and Tailwind 4.`
+					`I was a frontend developer at  for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages that served millions of customers. Last year, I rebuilt the <a class="hover:text-blue-300"href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
 				)}
 			{/snippet}
 		</IntroSection>
