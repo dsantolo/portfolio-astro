@@ -84,7 +84,7 @@
 {#snippet genericDescription(classes: string, descriptionText: string)}
 	<p
 		class={cn(
-			'z-50  max-w-[620px] rounded-2xl border-2 border-gray-700 bg-linear-to-br from-gray-950 from-75% to-stone-950 p-4',
+			'z-50  max-w-[980px] rounded-2xl border-2 border-gray-700 bg-linear-to-br from-gray-950 from-75% to-stone-950 p-4',
 			classes
 		)}
 	>
