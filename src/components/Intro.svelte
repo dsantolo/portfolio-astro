@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte';
 	import { animate, stagger, JSAnimation } from 'animejs';
 	import { cn } from '../utils.ts';
+	import GitHubLogo from '../assets/github-mark.svg';
+	import LinkedInLogo from '../assets/linkedin-logo.png';
 
 	let isMounted = $state(false);
 	let isTechStackOpen = $state(false);
@@ -46,7 +48,7 @@
 			y: { from: '25vh', ease: 'outQuad' },
 			ease: 'inOutQuad'
 		});
-		introNavFadeAnim = animate('.introlink, .intro-section', {
+		introNavFadeAnim = animate('.introlink, .logos-container, .intro-section', {
 			delay: stagger(250, { start: introDelay + introHeaderAnimDuration }),
 			opacity: [0, 1]
 		});
@@ -84,7 +86,7 @@
 {#snippet genericDescription(classes: string, descriptionText: string)}
 	<p
 		class={cn(
-			'z-50  max-w-[980px] rounded-2xl border-2 border-gray-700 bg-linear-to-br from-gray-950 from-75% to-stone-950 p-4',
+			'z-50 max-w-[980px] rounded-2xl border-2 border-gray-700 bg-linear-to-br from-gray-950 from-75% to-stone-950 p-4',
 			classes
 		)}
 	>
@@ -131,6 +133,14 @@
 			<h2 id="coming-soon" class="flex flex-col justify-center text-gray-100 opacity-0">
 				Coming Soon
 			</h2>
+			<div class="logos-container flex w-full justify-evenly">
+				<a href="https://github.com/dsantolo">
+					<img src={GitHubLogo.src} alt="GitHub Logo" class="[&_svg:fill-white] size-24" />
+				</a>
+				<a href="https://linkedin.com/in/dereksantolo">
+					<img src={LinkedInLogo.src} alt="LinkedIn Logo" class="size-24 fill-white" />
+				</a>
+			</div>
 		</div>
 		<IntroSection
 			heading={'Frontend'}
