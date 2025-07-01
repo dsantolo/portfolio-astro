@@ -12,6 +12,7 @@
 
 	// Declare animations:
 	let comingSoonAnimation: JSAnimation;
+	let resumeAnimation: JSAnimation;
 	let introHeaderAnim: JSAnimation;
 	let introNavFadeAnim: JSAnimation;
 	let introAnimations: JSAnimation[];
@@ -48,7 +49,7 @@
 			y: { from: '25vh', ease: 'outQuad' },
 			ease: 'inOutQuad'
 		});
-		introNavFadeAnim = animate('.introlink, .logos-container, .intro-section', {
+		introNavFadeAnim = animate('.introlink, #resume-link, .logos-container, .intro-section', {
 			delay: stagger(250, { start: introDelay + introHeaderAnimDuration }),
 			opacity: [0, 1]
 		});
@@ -133,6 +134,13 @@
 			<h2 id="coming-soon" class="flex flex-col justify-center text-gray-100 opacity-0">
 				Coming Soon
 			</h2>
+			<a id="resume-link" href="/resume.pdf"
+				><h2
+					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors hover:text-gray-200"
+				>
+					Resume
+				</h2></a
+			>
 			<div class="logos-container flex w-full justify-evenly">
 				<a href="https://github.com/dsantolo">
 					<img src={GitHubLogo.src} alt="GitHub Logo" class="[&_svg:fill-white] size-24" />
