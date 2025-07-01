@@ -124,9 +124,11 @@
 		</svg>
 	</button>
 	<main class="flex flex-col items-center justify-evenly text-gray-700">
-		<div class="flex h-[75vh] flex-col items-center justify-center py-8 md:justify-evenly md:py-2">
+		<div
+			class="flex min-h-[75vh] flex-col items-center justify-between py-8 md:justify-evenly md:py-2"
+		>
 			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
-			<ul class="flex size-full flex-col items-center justify-around md:h-auto md:flex-row">
+			<ul class="flex size-full flex-col items-center gap-12 md:h-auto md:flex-row">
 				{#each introLinkTitles as title}
 					{@render IntroLink(title)}
 				{/each}
