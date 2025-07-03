@@ -141,7 +141,7 @@
 				><h2
 					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors hover:text-gray-200"
 				>
-					Resume
+					Résumé
 				</h2></a
 			>
 			<div class="logos-container flex w-screen items-center justify-evenly gap-4 px-4 md:w-full">
