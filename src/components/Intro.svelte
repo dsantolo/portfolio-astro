@@ -4,6 +4,7 @@
 	import { animate, stagger, JSAnimation } from 'animejs';
 	import { cn } from '../utils.ts';
 	import GitHubLogo from '../assets/github-mark.svg';
+	import MailSVG from '../assets/mail.svelte';
 	import LinkedInLogo from '../assets/linkedin-logo.png';
 
 	let isMounted = $state(false);
@@ -128,7 +129,7 @@
 			class="flex min-h-screen flex-col items-center justify-between py-8 md:min-h-[75vh] md:justify-evenly md:py-2"
 		>
 			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
-			<ul class="flex size-full flex-col items-center gap-12 md:h-auto md:flex-row">
+			<ul class="flex size-full flex-col items-center justify-center gap-12 md:h-auto md:flex-row">
 				{#each introLinkTitles as title}
 					{@render IntroLink(title)}
 				{/each}
@@ -143,12 +144,17 @@
 					Resume
 				</h2></a
 			>
-			<div class="logos-container flex w-full justify-evenly">
+			<div class="logos-container flex w-screen items-center justify-evenly gap-4 px-4 md:w-full">
 				<a href="https://github.com/dsantolo">
-					<img src={GitHubLogo.src} alt="GitHub Logo" class="[&_svg:fill-white] size-24" />
+					<img src={GitHubLogo.src} alt="GitHub Logo" class="size-24 shrink" />
+				</a>
+				<a href="mailto:derek.santolo@gmail.com">
+					<MailSVG
+						className=" fill-gray-700 hover:fill-gray-200 transition-colors size-24 shrink"
+					/>
 				</a>
 				<a href="https://linkedin.com/in/dereksantolo">
-					<img src={LinkedInLogo.src} alt="LinkedIn Logo" class="size-24 fill-white" />
+					<img src={LinkedInLogo.src} alt="LinkedIn Logo" class="h-24 shrink" />
 				</a>
 			</div>
 		</div>
