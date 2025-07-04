@@ -161,13 +161,13 @@
 		<IntroSection
 			heading={'Frontend'}
 			date={'2019-2025'}
-			entities={'Pepperdine, , USC'}
+			entities={'Pepperdine, Apple, USC'}
 			classes="from-red-950"
 		>
 			{#snippet description()}
 				{@render genericDescription(
 					'to-red-950',
-					`I was a frontend developer at  for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages that served millions of customers. Last year, I rebuilt the <a class="hover:text-blue-300"href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
+					`I was a frontend developer at Apple for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages that served millions of customers. Last year, I rebuilt the <a class="hover:text-blue-300"href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
 				)}
 			{/snippet}
 		</IntroSection>
