@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { cn } from '../utils.ts';
+	import { cn } from '@/utils/cn.ts';
 
 	interface IntroSectionProps {
 		heading: string;

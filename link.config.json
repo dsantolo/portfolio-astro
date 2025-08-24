@@ -1,0 +1,4 @@
+{
+	"packages": ["../../Clones/prettier-plugin-tailwindcss"],
+	"deepLink": true
+}

@@ -1,5 +1,5 @@
 <script>
-	import { cn } from '../utils.ts';
+	import { cn } from '@/utils/cn.ts';
 
 	let { className = '' } = $props();
 </script>

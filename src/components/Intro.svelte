@@ -2,7 +2,7 @@
 	import IntroSection from './IntroSection.svelte';
 	import { onMount } from 'svelte';
 	import { animate, stagger, JSAnimation } from 'animejs';
-	import { cn } from '../utils.ts';
+	import { cn } from '@/utils/cn.ts';
 	import GitHubLogo from '../assets/github-mark.svg';
 	import MailSVG from '../assets/mail.svelte';
 	import LinkedInLogo from '../assets/linkedin-logo.png';
@@ -50,10 +50,13 @@
 			y: { from: '25vh', ease: 'outQuad' },
 			ease: 'inOutQuad'
 		});
-		introNavFadeAnim = animate('.introlink, #resume-link, .logos-container, .intro-section', {
-			delay: stagger(250, { start: introDelay + introHeaderAnimDuration }),
-			opacity: [0, 1]
-		});
+		introNavFadeAnim = animate(
+			'.Snippet-introlink, #resume-link, .logos-container, .intro-section',
+			{
+				delay: stagger(250, { start: introDelay + introHeaderAnimDuration }),
+				opacity: [0, 1]
+			}
+		);
 		introAnimations = [introHeaderAnim, introNavFadeAnim];
 
 		comingSoonAnimation = animate('#coming-soon', {
@@ -71,7 +74,7 @@
 {#snippet IntroLink(title: string)}
 	<button
 		class={cn(
-			'introlink w-36 rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white',
+			'Snippet-introlink w-36 cursor-pointer rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white',
 			{
 				'to-white text-white': selected == title,
 				'to-white/50 text-white/50': selected !== title
@@ -131,7 +134,13 @@
 			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
 			<ul class="flex size-full flex-col items-center justify-center gap-12 md:h-auto md:flex-row">
 				{#each introLinkTitles as title}
-					{@render IntroLink(title)}
+					{#if title === 'Blog'}
+						<a href="/blog" class="">
+							{@render IntroLink(title)}
+						</a>
+					{:else}
+						{@render IntroLink(title)}
+					{/if}
 				{/each}
 			</ul>
 			<h2 id="coming-soon" class="flex flex-col justify-center text-gray-100 opacity-0">

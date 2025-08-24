@@ -7,21 +7,34 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
+		"update-theme": "tsx scripts/update-theme.ts",
+		"new": "tsx scripts/new-post.ts"
 	},
 	"dependencies": {
 		"@astrojs/svelte": "^7.0.11",
+		"@astrojs/vercel": "^8.2.6",
 		"@tailwindcss/vite": "^4.1.4",
 		"animejs": "^4.0.1",
 		"astro": "^5.7.5",
+		"astro-og-canvas": "^0.7.0",
 		"clsx": "^2.1.1",
+		"katex": "^0.16.22",
+		"markdown-it": "^14.1.0",
+		"node-html-parser": "^7.0.1",
 		"prettier": "^3.5.3",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.13",
+		"rehype-katex": "^7.0.1",
+		"sanitize-html": "^2.17.0",
 		"svelte": "^5.28.2",
 		"tailwind-merge": "^3.2.0",
 		"tailwindcss": "^4.1.4",
 		"typescript": "^5.8.3"
+	},
+	"devDependencies": {
+		"@types/sanitize-html": "^2.16.0",
+		"@types/markdown-it": "^14.1.2"
 	}
 }

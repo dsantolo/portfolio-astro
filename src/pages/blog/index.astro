@@ -1,0 +1,16 @@
+---
+import IndexLayout from '@/layouts/blog/IndexLayout.astro';
+import About from '@/components/blog/widgets/About.astro';
+import PostList from '@/components/blog/widgets/PostList.astro';
+import { themeConfig } from '@/config';
+import { getSortedFilteredPosts } from '@/utils/draft';
+
+const posts = await getSortedFilteredPosts();
+---
+
+<IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
+	<About />
+	<main>
+		<PostList posts={posts} />
+	</main>
+</IndexLayout>
