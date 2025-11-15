@@ -176,7 +176,7 @@
 			{#snippet description()}
 				{@render genericDescription(
 					'to-red-950',
-					`I was a frontend developer at Apple for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages that served millions of customers. Last year, I rebuilt the <a class="hover:text-blue-300"href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
+					`I was a frontend developer at Apple for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages (<a class="hover:text-blue-300"href="https://www.apple.com/shop/buy-mac/mac-studio?bfil=2&option.thunderbolt_aos_phantom_z1cd=065-CGXJ&option.memory_aos_phantom_z1cd=065-CGWM&option.processor_and_graphics_aos_phantom_z1cd=065-CGWH&option.sw_final_cut_pro_z1cd=065-CGXT&option.sw_logic_pro_z1cd=065-CGXW&option.hard_drivesolid_state_drive_aos_phantom_z1cd=065-CKT9&product=mu963ll/a&step=add_ons">like this</a>) that served millions of customers. I also built landing pages driven by an internal JS animation library (similar to Motion). Last year, I rebuilt the <a class="hover:text-blue-300"href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
 				)}
 			{/snippet}
 		</IntroSection>
