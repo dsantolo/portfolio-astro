@@ -184,7 +184,7 @@
 			{#snippet description()}
 				{@render genericDescription(
 					'to-cyan-950',
-					'I am currently attending USC pursuing an M.S. in Computer Science, primarily to learn more about game development and computer graphics. I\'ve taken courses like Game Engine Development, Computer Graphics, and Computer Animation and Simulation. Additionally, I am reading "Metal by Tutorial" by Caroline Begbie to teach myself Metal. I hope to produce some Metal demos soon!'
+					'I recently obtained an M.S. in Computer Science at USC, primarily to learn more about game development and computer graphics. I took courses such as Game Engine Development, Computer Graphics, and Computer Animation and Simulation. Additionally, I am reading "Metal by Tutorial" by Caroline Begbie to teach myself Metal. I hope to produce some Metal demos soon!'
 				)}
 			{/snippet}
 		</IntroSection>
