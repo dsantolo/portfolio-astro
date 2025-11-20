@@ -129,6 +129,9 @@
 	</button>
 	<main class="flex flex-col items-center justify-evenly text-gray-700">
 		<div
+			class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent group-hover:scale-x-150"
+		></div>
+		<div
 			class="flex min-h-screen flex-col items-center justify-between py-8 md:min-h-[75vh] md:justify-evenly md:py-2"
 		>
 			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
