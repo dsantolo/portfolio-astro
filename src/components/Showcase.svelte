@@ -22,6 +22,8 @@
 	let currentIndex = $state(0);
 	let hoverStates = $state<boolean[]>([]);
 	let hasHovered = $state<boolean[]>([]);
+	let isTransitioning = $state(false);
+	let controlsHover = $state(false);
 
 	const clampIndex = (index: number) => {
 		if (items.length === 0) return 0;
@@ -54,6 +56,24 @@
 		hoverStates[index] = false;
 	};
 
+	const onTrackTransitionStart = (event: TransitionEvent) => {
+		if (event.propertyName !== 'transform') return;
+		isTransitioning = true;
+	};
+
+	const onTrackTransitionEnd = (event: TransitionEvent) => {
+		if (event.propertyName !== 'transform') return;
+		isTransitioning = false;
+	};
+
+	const onControlsEnter = () => {
+		controlsHover = true;
+	};
+
+	const onControlsLeave = () => {
+		controlsHover = false;
+	};
+
 	$effect(() => {
 		if (hoverStates.length !== items.length) {
 			hoverStates = items.map((_, index) => hoverStates[index] ?? false);
@@ -67,7 +87,7 @@
 <svelte:window onkeydown={onKeydown} />
 
 <div
-	class="font-twoweekend grid min-h-screen w-full grid-rows-[20vh_1fr] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%),linear-gradient(135deg,rgba(8,8,12,1),rgba(0,0,0,1))] tracking-[0.01em] text-white max-lg:grid-rows-[22vh_1fr]"
+	class="grid min-h-screen w-full grid-rows-[20vh_1fr] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%),linear-gradient(135deg,rgba(8,8,12,1),rgba(0,0,0,1))] tracking-[0.01em] text-white max-lg:grid-rows-[22vh_1fr]"
 	role="region"
 	aria-roledescription="carousel"
 	aria-label="Showcase"
@@ -75,7 +95,7 @@
 >
 	<section class="flex items-center justify-center px-[clamp(1.5rem,5vw,6rem)] py-8">
 		<nav
-			class="flex gap-6 rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm tracking-[0.2em] uppercase backdrop-blur-lg max-lg:flex-wrap max-lg:justify-center max-lg:gap-3"
+			class="flex gap-6 rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg max-lg:flex-wrap max-lg:justify-center max-lg:gap-3"
 		>
 			{#each navLinks as link}
 				<a
@@ -90,10 +110,16 @@
 		</nav>
 	</section>
 
-	<section class="relative h-[80vh] w-full overflow-hidden max-lg:h-[78vh]" aria-live="polite">
+	<section
+		class="font-twoweekend relative h-[80vh] w-full overflow-hidden max-lg:h-[78vh]"
+		aria-live="polite"
+	>
 		<div
 			class="flex h-full w-full transition-transform duration-[800ms] ease-out"
 			style={`transform: translateX(-${currentIndex * 100}%);`}
+			ontransitionstart={onTrackTransitionStart}
+			ontransitionend={onTrackTransitionEnd}
+			ontransitioncancel={onTrackTransitionEnd}
 		>
 			{#each items as item, index}
 				<div
@@ -108,8 +134,13 @@
 							alt={item.title}
 							loading="lazy"
 							class="showcase-cover h-full w-full scale-[1.02] object-cover"
-							class:showcase-cover-hovered={hoverStates[index]}
-							class:showcase-cover-unhovered={hasHovered[index] && !hoverStates[index]}
+							class:showcase-cover-transitioning={isTransitioning && !hoverStates[index]}
+							class:showcase-cover-hovered={hoverStates[index] ||
+								(controlsHover && index === currentIndex)}
+							class:showcase-cover-unhovered={!isTransitioning &&
+								hasHovered[index] &&
+								!hoverStates[index] &&
+								!(controlsHover && index === currentIndex)}
 						/>
 					</div>
 					<div
@@ -117,6 +148,7 @@
 					>
 						<div
 							class="font-twoweekend w-full max-w-none text-[clamp(1.05rem,1.6vw,1.35rem)] leading-[1.8] opacity-0 transition-opacity duration-150 ease-out [text-shadow:0_12px_30px_rgba(0,0,0,0.4)] group-hover:opacity-100 motion-reduce:transition-none"
+							class:opacity-100={controlsHover && index === currentIndex}
 						>
 							<p class="m-0 p-7">
 								{item.description}
@@ -135,6 +167,8 @@
 
 		<button
 			class="absolute top-1/2 left-8 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/55 text-2xl text-white backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-white/60 hover:bg-white/20 lg:flex"
+			onmouseenter={onControlsEnter}
+			onmouseleave={onControlsLeave}
 			onclick={goPrevious}
 			aria-label="Previous item"
 			type="button"
@@ -143,6 +177,8 @@
 		</button>
 		<button
 			class="absolute top-1/2 right-8 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/55 text-2xl text-white backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-white/60 hover:bg-white/20 lg:flex"
+			onmouseenter={onControlsEnter}
+			onmouseleave={onControlsLeave}
 			onclick={goNext}
 			aria-label="Next item"
 			type="button"
@@ -169,6 +205,11 @@
 		animation: showcase-blur-in 150ms ease-out forwards;
 	}
 
+	.showcase-cover-transitioning {
+		animation: showcase-blur-in 150ms ease-out forwards;
+		filter: blur(12px);
+	}
+
 	.showcase-cover-unhovered {
 		animation: showcase-blur-out 150ms ease-out forwards;
 	}
@@ -193,6 +234,7 @@
 
 	@media (prefers-reduced-motion: reduce) {
 		.showcase-cover-hovered,
+		.showcase-cover-transitioning,
 		.showcase-cover-unhovered {
 			animation: none;
 		}
