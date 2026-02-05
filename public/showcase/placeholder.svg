@@ -1,0 +1,27 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0f1f" />
+      <stop offset="0.5" stop-color="#1b1f3a" />
+      <stop offset="1" stop-color="#071019" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(1200 200) rotate(120) scale(500 320)">
+      <stop offset="0" stop-color="#4b7cf3" stop-opacity="0.85" />
+      <stop offset="1" stop-color="#4b7cf3" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <rect width="1600" height="900" fill="url(#glow)" />
+  <rect x="80" y="100" width="1440" height="700" rx="40" stroke="#2c355a" stroke-width="2" fill="none" />
+  <g fill="#ffffff" fill-opacity="0.7">
+    <rect x="180" y="210" width="520" height="24" rx="12" />
+    <rect x="180" y="260" width="360" height="16" rx="8" />
+    <rect x="180" y="310" width="440" height="16" rx="8" />
+    <rect x="180" y="360" width="300" height="16" rx="8" />
+  </g>
+  <g fill="#ffffff" fill-opacity="0.85">
+    <rect x="980" y="260" width="420" height="36" rx="18" />
+    <rect x="980" y="320" width="280" height="24" rx="12" fill-opacity="0.55" />
+  </g>
+  <text x="180" y="560" fill="#ffffff" fill-opacity="0.35" font-family="Inter, Arial, sans-serif" font-size="28" letter-spacing="6">PLACEHOLDER</text>
+</svg>

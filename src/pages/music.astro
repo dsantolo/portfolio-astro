@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Showcase from '../components/Showcase.svelte';
+
+const navLinks = [
+	{ label: 'Software', href: '/' },
+	{ label: 'Music', href: '/music' },
+	{ label: 'Gaming', href: '/gaming' },
+	{ label: 'Blog', href: '/blog' }
+];
+
+const items = [
+	{
+		title: 'Album Title One',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Two',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Three',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Four',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Five',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Six',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Seven',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Eight',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Nine',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Album Title Ten',
+		subtitle: 'Artist Name',
+		description:
+			'A short paragraph about why this album resonated with me. Replace this with your story about the sound, the season, or the moment it became part of your life.',
+		image: '/showcase/placeholder.svg'
+	}
+];
+---
+
+<Layout>
+	<Showcase items={items} navLinks={navLinks} activeLabel="Music" client:load />
+</Layout>

@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Showcase from '../components/Showcase.svelte';
+
+const navLinks = [
+	{ label: 'Software', href: '/' },
+	{ label: 'Music', href: '/music' },
+	{ label: 'Gaming', href: '/gaming' },
+	{ label: 'Blog', href: '/blog' }
+];
+
+const items = [
+	{
+		title: 'Game Title One',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Two',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Three',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Four',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Five',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Six',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Seven',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Eight',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Nine',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	},
+	{
+		title: 'Game Title Ten',
+		subtitle: 'Developer Name',
+		description:
+			'A short paragraph about why this game resonated with me. Replace this with your story about the mechanics, world, or the moment it became a favorite.',
+		image: '/showcase/placeholder.svg'
+	}
+];
+---
+
+<Layout>
+	<Showcase items={items} navLinks={navLinks} activeLabel="Gaming" client:load />
+</Layout>

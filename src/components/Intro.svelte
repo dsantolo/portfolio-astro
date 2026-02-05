@@ -9,28 +9,20 @@
 
 	let isMounted = $state(false);
 	let isTechStackOpen = $state(false);
-	let selected: string = $state('Software');
 
 	// Declare animations:
-	let comingSoonAnimation: JSAnimation;
-	let resumeAnimation: JSAnimation;
 	let introHeaderAnim: JSAnimation;
 	let introNavFadeAnim: JSAnimation;
 	let introAnimations: JSAnimation[];
 
-	const introLinkTitles = ['Software', 'Music', 'Gaming', 'Blog'];
+	const introLinks = [
+		{ label: 'Software', href: '/' },
+		{ label: 'Music', href: '/music' },
+		{ label: 'Gaming', href: '/gaming' },
+		{ label: 'Blog', href: '/blog' }
+	];
 	const introDelay = 200;
 	const introHeaderAnimDuration = 400;
-
-	// Event handlers:
-	const onIntroLinkClick = (title: string) => {
-		selected = title;
-
-		if (selected !== 'Software') {
-			comingSoonAnimation.restart();
-			selected = 'Software';
-		}
-	};
 
 	const onReplayButtonClick = () => {
 		introAnimations.forEach((anim: JSAnimation) => {
@@ -59,33 +51,19 @@
 		);
 		introAnimations = [introHeaderAnim, introNavFadeAnim];
 
-		comingSoonAnimation = animate('#coming-soon', {
-			opacity: 1,
-			alternate: true,
-			loop: 1,
-			loopDelay: 50,
-			duration: 500,
-			ease: 'outQuad',
-			autoplay: false
-		});
 	});
 </script>
 
-{#snippet IntroLink(title: string)}
-	<button
+{#snippet IntroLink(title: string, href: string)}
+	<li
 		class={cn(
-			'Snippet-introlink w-36 cursor-pointer rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white',
-			{
-				'to-white text-white': selected == title,
-				'to-white/50 text-white/50': selected !== title
-			}
+			'Snippet-introlink w-36 list-none rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white'
 		)}
-		onclick={() => {
-			onIntroLinkClick(title);
-		}}
 	>
-		<li class="">{title}</li></button
-	>
+		<a href={href} class="block w-full text-center">
+			{title}
+		</a>
+	</li>
 {/snippet}
 
 {#snippet genericDescription(classes: string, descriptionText: string)}
@@ -136,19 +114,10 @@
 		>
 			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
 			<ul class="flex size-full flex-col items-center justify-center gap-12 md:h-auto md:flex-row">
-				{#each introLinkTitles as title}
-					{#if title === 'Blog'}
-						<a href="/blog" class="">
-							{@render IntroLink(title)}
-						</a>
-					{:else}
-						{@render IntroLink(title)}
-					{/if}
+				{#each introLinks as link}
+					{@render IntroLink(link.label, link.href)}
 				{/each}
 			</ul>
-			<h2 id="coming-soon" class="flex flex-col justify-center text-gray-100 opacity-0">
-				Coming Soon
-			</h2>
 			<a id="resume-link" href="/resume.pdf"
 				><h2
 					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors hover:text-gray-200"
