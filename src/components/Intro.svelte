@@ -50,7 +50,6 @@
 			}
 		);
 		introAnimations = [introHeaderAnim, introNavFadeAnim];
-
 	});
 </script>
 
@@ -60,7 +59,7 @@
 			'Snippet-introlink w-36 list-none rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white'
 		)}
 	>
-		<a href={href} class="block w-full text-center">
+		<a {href} class="block w-full text-center">
 			{title}
 		</a>
 	</li>
@@ -110,10 +109,16 @@
 			class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent group-hover:scale-x-150"
 		></div>
 		<div
-			class="flex min-h-screen flex-col items-center justify-between py-8 md:min-h-[75vh] md:justify-evenly md:py-2"
+			class="flex min-h-screen flex-col items-center justify-center gap-8 py-10 md:min-h-[75vh] md:gap-10 md:py-6"
 		>
-			<h1 class="text-5xl transition-colors hover:text-white md:text-9xl">Derek Santolo</h1>
-			<ul class="flex size-full flex-col items-center justify-center gap-12 md:h-auto md:flex-row">
+			<h1
+				class="animate-gradient-text bg-linear-60 from-gray-200 from-85% to-gray-700 bg-clip-text text-5xl text-transparent md:text-9xl"
+			>
+				Derek Santolo
+			</h1>
+			<ul
+				class="grid w-full max-w-sm grid-cols-2 place-items-center gap-6 md:flex md:w-auto md:max-w-none md:flex-row md:gap-12"
+			>
 				{#each introLinks as link}
 					{@render IntroLink(link.label, link.href)}
 				{/each}
@@ -125,7 +130,9 @@
 					Résumé
 				</h2></a
 			>
-			<div class="logos-container flex w-screen items-center justify-evenly gap-4 px-4 md:w-full">
+			<div
+				class="logos-container flex w-full items-center justify-center gap-8 px-6 md:justify-evenly md:gap-6"
+			>
 				<a href="https://github.com/dsantolo">
 					<img src={GitHubLogo.src} alt="GitHub Logo" class="size-24 shrink" />
 				</a>
