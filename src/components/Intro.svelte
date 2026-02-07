@@ -44,7 +44,7 @@
 			ease: 'inOutQuad'
 		});
 		introNavFadeAnim = animate(
-			'.Snippet-introlink, #resume-link, .logos-container, .intro-section',
+			'nav, .Snippet-introlink, #resume-link, .logos-container, .intro-section',
 			{
 				delay: stagger(250, { start: introDelay + introHeaderAnimDuration }),
 				opacity: [0, 1]
@@ -109,9 +109,9 @@
 			</g>
 		</svg>
 	</button>
-	<main class="flex flex-col items-center justify-evenly text-gray-700">
+	<main class="group/main flex flex-col items-center justify-evenly text-gray-700">
 		<div
-			class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent transition-transform duration-150 ease-out group-hover:scale-x-150"
+			class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent transition-transform duration-150 ease-out group-hover/main:scale-x-150"
 		></div>
 		<div
 			class="flex min-h-screen flex-col items-center justify-center gap-8 py-10 md:min-h-[75vh] md:gap-10 md:py-6"
@@ -122,7 +122,7 @@
 				Derek Santolo
 			</h1>
 			<nav
-				class="rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg"
+				class="font-twoweekend rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg"
 				aria-label="Primary"
 			>
 				<ul class="flex flex-wrap items-center justify-center gap-3 md:gap-6">
@@ -220,6 +220,6 @@
 		And despite all that...we still shouldn't leave the good undone.
 	</footer>
 	<div
-		class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent transition-transform duration-150 ease-out group-hover:scale-x-150"
+		class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent transition-transform duration-150 ease-out group-hover/main:scale-x-150"
 	></div>
 </div>
