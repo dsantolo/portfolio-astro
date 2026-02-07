@@ -3,9 +3,9 @@
 	import { onMount } from 'svelte';
 	import { animate, stagger, JSAnimation } from 'animejs';
 	import { cn } from '@/utils/cn.ts';
-	import GitHubLogo from '../assets/github-mark.svg';
+	import GitHubSVG from '../assets/github-mark.svelte';
 	import MailSVG from '../assets/mail.svelte';
-	import LinkedInLogo from '../assets/linkedin-logo.png';
+	import LinkedInSVG from '../assets/linkedin-logo.svelte';
 
 	let isMounted = $state(false);
 	let isTechStackOpen = $state(false);
@@ -21,6 +21,7 @@
 		{ label: 'Gaming', href: '/gaming' },
 		{ label: 'Blog', href: '/blog' }
 	];
+	const introActiveLabel = 'Software';
 	const introDelay = 200;
 	const introHeaderAnimDuration = 400;
 
@@ -54,12 +55,16 @@
 </script>
 
 {#snippet IntroLink(title: string, href: string)}
-	<li
-		class={cn(
-			'Snippet-introlink w-36 list-none rounded-2xl border-2 bg-linear-to-br from-black from-50% to-white px-2 text-xl text-white transition-colors duration-300 hover:text-white'
-		)}
-	>
-		<a {href} class="block w-full text-center">
+	<li class="list-none">
+		<a
+			{href}
+			class={cn(
+				'Snippet-introlink rounded-full px-3 py-1.5 text-white/60 transition-colors duration-150 ease-out hover:bg-white/20 hover:text-white',
+				{
+					'bg-white/20 text-white': title === introActiveLabel
+				}
+			)}
+		>
 			{title}
 		</a>
 	</li>
@@ -116,13 +121,16 @@
 			>
 				Derek Santolo
 			</h1>
-			<ul
-				class="grid w-full max-w-sm grid-cols-2 place-items-center gap-6 md:flex md:w-auto md:max-w-none md:flex-row md:gap-12"
+			<nav
+				class="rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg"
+				aria-label="Primary"
 			>
-				{#each introLinks as link}
-					{@render IntroLink(link.label, link.href)}
-				{/each}
-			</ul>
+				<ul class="flex flex-wrap items-center justify-center gap-3 md:gap-6">
+					{#each introLinks as link}
+						{@render IntroLink(link.label, link.href)}
+					{/each}
+				</ul>
+			</nav>
 			<a id="resume-link" href="/resume.pdf"
 				><h2
 					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors hover:text-gray-200"
@@ -133,16 +141,29 @@
 			<div
 				class="logos-container flex w-full items-center justify-center gap-8 px-6 md:justify-evenly md:gap-6"
 			>
-				<a href="https://github.com/dsantolo">
-					<img src={GitHubLogo.src} alt="GitHub Logo" class="size-24 shrink" />
-				</a>
-				<a href="mailto:derek.santolo@gmail.com">
-					<MailSVG
-						className=" fill-gray-700 hover:fill-gray-200 transition-colors size-24 shrink"
+				<a
+					href="https://github.com/dsantolo"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors hover:bg-white/20 md:h-20 md:w-24"
+				>
+					<GitHubSVG
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors h-10 w-auto md:h-12"
 					/>
 				</a>
-				<a href="https://linkedin.com/in/dereksantolo">
-					<img src={LinkedInLogo.src} alt="LinkedIn Logo" class="h-24 shrink" />
+				<a
+					href="mailto:derek.santolo@gmail.com"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors hover:bg-white/20 md:h-20 md:w-24"
+				>
+					<MailSVG
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors size-10 md:size-12"
+					/>
+				</a>
+				<a
+					href="https://linkedin.com/in/dereksantolo"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors hover:bg-white/20 md:h-20 md:w-24"
+				>
+					<LinkedInSVG
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors h-10 w-auto md:h-12"
+					/>
 				</a>
 			</div>
 		</div>
