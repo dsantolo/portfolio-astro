@@ -24,3 +24,19 @@
 .bg-gradient-button {
 	background-image: linear-gradient(to right, white, black);
 }
+
+@keyframes text-fill-right {
+	from {
+		background-position: 0% 50%;
+	}
+	to {
+		background-position: 100% 50%;
+	}
+}
+
+@layer utilities {
+	.animate-gradient-text {
+		background-size: 500% auto;
+		animation: text-fill-right 2000ms ease-out forwards;
+	}
+}
