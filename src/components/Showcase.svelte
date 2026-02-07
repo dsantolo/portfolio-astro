@@ -150,8 +150,8 @@
 		</div>
 
 		<button
-			class="pointer-events-none absolute top-1/2 left-8 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
-			class:pointer-events-auto={isStageHovered}
+			class="absolute top-1/2 left-8 z-30 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
+			class:pointer-events-none={!isStageHovered}
 			class:opacity-100={isStageHovered}
 			onclick={goPrevious}
 			aria-label="Previous item"
@@ -160,8 +160,8 @@
 			<span aria-hidden="true">&#8592;</span>
 		</button>
 		<button
-			class="pointer-events-none absolute top-1/2 right-12 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
-			class:pointer-events-auto={isStageHovered}
+			class="absolute top-1/2 right-12 z-30 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
+			class:pointer-events-none={!isStageHovered}
 			class:opacity-100={isStageHovered}
 			onclick={goNext}
 			aria-label="Next item"
