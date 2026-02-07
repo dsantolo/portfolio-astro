@@ -94,7 +94,7 @@
 	</section>
 
 	<h2
-		class="px-[clamp(1.5rem,5vw,6rem)] pb-6 text-center text-2xl tracking-[0.12em] text-white/80 uppercase max-lg:pb-4"
+		class="font-twoweekend px-[clamp(1.5rem,5vw,6rem)] pb-6 text-center text-2xl tracking-[0.12em] text-white/80 uppercase max-lg:pb-4"
 	>
 		Ten Favorites
 	</h2>

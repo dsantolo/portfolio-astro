@@ -87,11 +87,11 @@
 	})}
 >
 	<button
-		class="absolute top-0 right-0 m-4 size-7 origin-top-right rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform hover:scale-200"
+		class="absolute top-0 right-0 m-4 size-7 origin-top-right rounded-3xl bg-gradient-to-br p-2 text-gray-200 transition-transform duration-150 ease-out hover:scale-200"
 		onclick={onReplayButtonClick}
 		aria-label="Replay"
 		><svg
-			class="fill-gray-700 hover:fill-white"
+			class="fill-gray-700 transition-colors duration-150 ease-out hover:fill-white"
 			version="1.1"
 			id="Capa_1"
 			xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@
 	</button>
 	<main class="flex flex-col items-center justify-evenly text-gray-700">
 		<div
-			class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent group-hover:scale-x-150"
+			class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent transition-transform duration-150 ease-out group-hover:scale-x-150"
 		></div>
 		<div
 			class="flex min-h-screen flex-col items-center justify-center gap-8 py-10 md:min-h-[75vh] md:gap-10 md:py-6"
@@ -133,7 +133,7 @@
 			</nav>
 			<a id="resume-link" href="/resume.pdf"
 				><h2
-					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors hover:text-gray-200"
+					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors duration-150 ease-out hover:text-gray-200"
 				>
 					Résumé
 				</h2></a
@@ -143,26 +143,26 @@
 			>
 				<a
 					href="https://github.com/dsantolo"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
 				>
 					<GitHubSVG
-						className="fill-gray-700 group-hover:fill-gray-200 transition-colors h-10 w-auto md:h-12"
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12"
 					/>
 				</a>
 				<a
 					href="mailto:derek.santolo@gmail.com"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
 				>
 					<MailSVG
-						className="fill-gray-700 group-hover:fill-gray-200 transition-colors size-10 md:size-12"
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out size-10 md:size-12"
 					/>
 				</a>
 				<a
 					href="https://linkedin.com/in/dereksantolo"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
 				>
 					<LinkedInSVG
-						className="fill-gray-700 group-hover:fill-gray-200 transition-colors h-10 w-auto md:h-12"
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12"
 					/>
 				</a>
 			</div>
@@ -176,7 +176,7 @@
 			{#snippet description()}
 				{@render genericDescription(
 					'to-red-950',
-					`I was a frontend developer at Apple for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages (<a class="hover:text-blue-300"href="https://www.apple.com/shop/buy-mac/mac-studio?bfil=2&option.thunderbolt_aos_phantom_z1cd=065-CGXJ&option.memory_aos_phantom_z1cd=065-CGWM&option.processor_and_graphics_aos_phantom_z1cd=065-CGWH&option.sw_final_cut_pro_z1cd=065-CGXT&option.sw_logic_pro_z1cd=065-CGXW&option.hard_drivesolid_state_drive_aos_phantom_z1cd=065-CKT9&product=mu963ll/a&step=add_ons">like this</a>) that served millions of customers. I also built landing pages driven by an internal JS animation library (similar to Motion). Last year, I rebuilt the <a class="hover:text-blue-300"href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
+					`I was a frontend developer at Apple for three years. I worked on the Apple Online Store, where I did my best to build pages that achieved the vision of Apple's designers while also optimizing performance and accessibility. I was involved with product launches and built user-facing pages (<a class="transition-colors duration-150 ease-out hover:text-blue-300" href="https://www.apple.com/shop/buy-mac/mac-studio?bfil=2&option.thunderbolt_aos_phantom_z1cd=065-CGXJ&option.memory_aos_phantom_z1cd=065-CGWM&option.processor_and_graphics_aos_phantom_z1cd=065-CGWH&option.sw_final_cut_pro_z1cd=065-CGXT&option.sw_logic_pro_z1cd=065-CGXW&option.hard_drivesolid_state_drive_aos_phantom_z1cd=065-CKT9&product=mu963ll/a&step=add_ons">like this</a>) that served millions of customers. I also built landing pages driven by an internal JS animation library (similar to Motion). Last year, I rebuilt the <a class="transition-colors duration-150 ease-out hover:text-blue-300" href="https://mobilemedia.usc.edu">website for USC's Mobile and Environmental Media Lab</a> using Astro, Svelte 5 and Tailwind 4.`
 				)}
 			{/snippet}
 		</IntroSection>
@@ -215,11 +215,11 @@
 		</button> -->
 	</main>
 	<footer
-		class="w-full border-b text-center text-gray-700 blur-xl transition-all duration-500 hover:blur-none"
+		class="w-full border-b text-center text-gray-700 blur-xl transition-all duration-150 ease-out hover:blur-none"
 	>
 		And despite all that...we still shouldn't leave the good undone.
 	</footer>
 	<div
-		class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent group-hover:scale-x-150"
+		class="h-px w-full bg-linear-to-r from-transparent via-gray-100 to-transparent transition-transform duration-150 ease-out group-hover:scale-x-150"
 	></div>
 </div>
