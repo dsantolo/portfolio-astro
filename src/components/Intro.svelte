@@ -59,7 +59,7 @@
 		<a
 			{href}
 			class={cn(
-				'Snippet-introlink rounded-full px-3 py-1.5 text-white/60 transition-colors duration-150 ease-out hover:bg-white/20 hover:text-white',
+				'Snippet-introlink rounded-full px-2.5 py-1 text-white/60 transition-colors duration-150 ease-out hover:bg-white/20 hover:text-white sm:px-3 sm:py-1.5',
 				{
 					'bg-white/20 text-white': title === introActiveLabel
 				}
@@ -122,10 +122,10 @@
 				Derek Santolo
 			</h1>
 			<nav
-				class="rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg"
+				class="w-full max-w-md rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs backdrop-blur-lg sm:w-auto sm:max-w-none sm:px-5 sm:py-2.5 sm:text-sm lg:px-6 lg:py-3"
 				aria-label="Primary"
 			>
-				<ul class="flex flex-wrap items-center justify-center gap-3 md:gap-6">
+				<ul class="flex flex-nowrap items-center justify-between gap-2 sm:gap-4 lg:gap-6">
 					{#each introLinks as link}
 						{@render IntroLink(link.label, link.href)}
 					{/each}
