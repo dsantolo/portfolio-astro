@@ -122,7 +122,7 @@
 				Derek Santolo
 			</h1>
 			<nav
-				class="font-twoweekend rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg"
+				class="rounded-full border border-white/15 bg-black/60 px-6 py-3 text-sm backdrop-blur-lg"
 				aria-label="Primary"
 			>
 				<ul class="flex flex-wrap items-center justify-center gap-3 md:gap-6">

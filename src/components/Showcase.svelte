@@ -21,8 +21,8 @@
 
 	let currentIndex = $state(0);
 	let isTransitioning = $state(false);
-	let isStageHovered = $state(false);
-	let hasEverHovered = $state(false);
+	let isStageBlurred = $state(false);
+	let hasEverBlurred = $state(false);
 
 	const clampIndex = (index: number) => {
 		if (items.length === 0) return 0;
@@ -47,18 +47,24 @@
 	};
 
 	const onStageEnter = () => {
-		isStageHovered = true;
-		hasEverHovered = true;
+		isStageBlurred = true;
+		hasEverBlurred = true;
 	};
 
 	const onStageLeave = () => {
-		isStageHovered = false;
+		isStageBlurred = false;
+	};
+
+	const onStagePointerDown = (event: PointerEvent) => {
+		if (event.pointerType === 'mouse') return;
+		isStageBlurred = !isStageBlurred;
+		hasEverBlurred = true;
 	};
 
 	const onTrackTransitionStart = (event: TransitionEvent) => {
 		if (event.propertyName !== 'transform') return;
 		isTransitioning = true;
-		hasEverHovered = true;
+		hasEverBlurred = true;
 	};
 
 	const onTrackTransitionEnd = (event: TransitionEvent) => {
@@ -100,82 +106,132 @@
 	</h2>
 
 	<section
-		class="font-twoweekend relative h-[80vh] w-full overflow-hidden max-lg:h-[78vh]"
+		class="font-twoweekend flex w-full flex-col gap-4 overflow-x-hidden lg:relative lg:block lg:h-[80vh] lg:overflow-hidden"
 		role="group"
 		aria-label="Showcase items"
 		aria-live="polite"
 		onmouseenter={onStageEnter}
 		onmouseleave={onStageLeave}
+		onpointerdown={onStagePointerDown}
 	>
-		<div
-			class="flex h-full w-full transition-transform duration-[800ms] ease-out"
-			style={`transform: translateX(-${currentIndex * 100}%);`}
-			ontransitionstart={onTrackTransitionStart}
-			ontransitionend={onTrackTransitionEnd}
-			ontransitioncancel={onTrackTransitionEnd}
-		>
-			{#each items as item, index}
-				<div class="relative h-full min-w-full" aria-hidden={index !== currentIndex}>
-					<div class="absolute inset-0 overflow-hidden">
-						<img
-							src={item.image}
-							alt={item.title}
-							loading="lazy"
-							class="showcase-cover h-full w-full scale-[1.02] bg-black object-contain"
-							class:showcase-cover-transitioning={isTransitioning && !isStageHovered}
-							class:showcase-cover-hovered={isStageHovered}
-							class:showcase-cover-unhovered={!isTransitioning && hasEverHovered && !isStageHovered}
-						/>
-					</div>
-					<div
-						class="relative z-20 grid h-full grid-cols-[7fr_3fr] items-center gap-[clamp(1.5rem,3vw,3rem)] bg-[linear-gradient(110deg,rgba(0,0,0,0.66),rgba(0,0,0,0.18)_60%)] p-[clamp(2rem,6vw,6rem)] max-lg:grid-cols-1 max-lg:text-left"
-					>
-						<div
-							class="font-twoweekend w-full max-w-none text-[clamp(1.05rem,1.6vw,1.35rem)] leading-[1.8] opacity-0 transition-opacity duration-150 ease-out [text-shadow:0_12px_30px_rgba(0,0,0,0.4)] motion-reduce:transition-none"
-							class:opacity-100={isStageHovered && index === currentIndex}
-						>
-							<p class="m-0 p-7">
-								{item.description}
-							</p>
-						</div>
-						<div class="pr-10 text-right tracking-[0.18em] uppercase max-lg:pr-0 max-lg:text-left">
-							<h2 class="m-0 mb-3 text-[clamp(2.4rem,4.4vw,4.6rem)]">{item.title}</h2>
-							<span class="inline-block text-[clamp(1rem,1.6vw,1.35rem)] text-white/70">
-								{item.subtitle}
-							</span>
-						</div>
-					</div>
+		<div class="relative h-[78vh] w-full overflow-hidden lg:h-full">
+			<div
+				class="absolute top-0 left-0 z-40 flex w-full items-center justify-center gap-4 px-[clamp(2rem,6vw,6rem)] pt-6 text-sm tracking-[0.3em] text-white/70 uppercase lg:hidden"
+			>
+				<button
+					class="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-base text-white/80 opacity-0 transition duration-150 hover:border-white/60 hover:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60"
+					class:pointer-events-none={!isStageBlurred}
+					class:opacity-100={isStageBlurred}
+					onpointerdown={(event) => event.stopPropagation()}
+					onclick={goPrevious}
+					aria-label="Previous item"
+					tabindex={isStageBlurred ? 0 : -1}
+					type="button"
+				>
+					<span aria-hidden="true">&#8592;</span>
+				</button>
+				<div class="flex items-center gap-2">
+					<span>{currentIndex + 1}</span>
+					<span class="opacity-50">/</span>
+					<span>{items.length}</span>
 				</div>
-			{/each}
+				<button
+					class="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-base text-white/80 opacity-0 transition duration-150 hover:border-white/60 hover:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60"
+					class:pointer-events-none={!isStageBlurred}
+					class:opacity-100={isStageBlurred}
+					onpointerdown={(event) => event.stopPropagation()}
+					onclick={goNext}
+					aria-label="Next item"
+					tabindex={isStageBlurred ? 0 : -1}
+					type="button"
+				>
+					<span aria-hidden="true">&#8594;</span>
+				</button>
+			</div>
+			<div
+				class="flex h-full w-full transition-transform duration-[800ms] ease-out"
+				style={`transform: translateX(-${currentIndex * 100}%);`}
+				ontransitionstart={onTrackTransitionStart}
+				ontransitionend={onTrackTransitionEnd}
+				ontransitioncancel={onTrackTransitionEnd}
+			>
+				{#each items as item, index}
+					<div class="relative h-full min-w-full" aria-hidden={index !== currentIndex}>
+						<div class="absolute inset-0 overflow-hidden">
+							<img
+								src={item.image}
+								alt={item.title}
+								loading="lazy"
+								class="showcase-cover h-full w-full scale-[1.02] bg-black object-contain"
+								class:showcase-cover-transitioning={isTransitioning && !isStageBlurred}
+								class:showcase-cover-hovered={isStageBlurred}
+								class:showcase-cover-unhovered={!isTransitioning &&
+									hasEverBlurred &&
+									!isStageBlurred}
+							/>
+						</div>
+						<div
+							class="relative z-20 grid h-full grid-cols-[7fr_3fr] items-center gap-[clamp(1.5rem,3vw,3rem)] bg-[linear-gradient(110deg,rgba(0,0,0,0.66),rgba(0,0,0,0.18)_60%)] p-[clamp(2rem,6vw,6rem)] max-lg:flex max-lg:flex-col max-lg:items-start max-lg:justify-center max-lg:gap-6 max-lg:pt-0 max-lg:text-left"
+						>
+							<div
+								class="font-twoweekend w-full max-w-none leading-[1.8] opacity-0 transition-opacity duration-150 ease-out motion-reduce:transition-none max-lg:order-3"
+								class:opacity-100={isStageBlurred && index === currentIndex}
+							>
+								<p class="m-0 p-7 max-lg:p-0">
+									{item.description}
+								</p>
+							</div>
+							<div class="pr-10 text-right tracking-[0.18em] uppercase max-lg:hidden">
+								<h2 class="m-0 mb-3 text-[clamp(2.4rem,4.4vw,4.6rem)]">{item.title}</h2>
+								<span class="inline-block text-[clamp(1rem,1.6vw,1.35rem)] text-white/70">
+									{item.subtitle}
+								</span>
+							</div>
+						</div>
+					</div>
+				{/each}
+			</div>
+
+			<button
+				class="absolute top-1/2 left-8 z-30 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
+				class:pointer-events-none={!isStageBlurred}
+				class:opacity-100={isStageBlurred}
+				onpointerdown={(event) => event.stopPropagation()}
+				onclick={goPrevious}
+				aria-label="Previous item"
+				type="button"
+			>
+				<span aria-hidden="true">&#8592;</span>
+			</button>
+			<button
+				class="absolute top-1/2 right-12 z-30 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
+				class:pointer-events-none={!isStageBlurred}
+				class:opacity-100={isStageBlurred}
+				onpointerdown={(event) => event.stopPropagation()}
+				onclick={goNext}
+				aria-label="Next item"
+				type="button"
+			>
+				<span aria-hidden="true">&#8594;</span>
+			</button>
+
+			<div
+				class="absolute bottom-8 left-8 hidden items-center gap-2 text-sm tracking-[0.3em] text-white/70 uppercase lg:flex"
+			>
+				<span>{currentIndex + 1}</span>
+				<span class="opacity-50">/</span>
+				<span>{items.length}</span>
+			</div>
 		</div>
-
-		<button
-			class="absolute top-1/2 left-8 z-30 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
-			class:pointer-events-none={!isStageHovered}
-			class:opacity-100={isStageHovered}
-			onclick={goPrevious}
-			aria-label="Previous item"
-			type="button"
-		>
-			<span aria-hidden="true">&#8592;</span>
-		</button>
-		<button
-			class="absolute top-1/2 right-12 z-30 hidden h-[3.25rem] w-[3.25rem] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 text-2xl text-white/70 opacity-0 transition duration-150 hover:scale-105 hover:border-white/60 hover:text-white focus-visible:scale-105 focus-visible:border-white/60 focus-visible:text-white focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white/60 lg:flex"
-			class:pointer-events-none={!isStageHovered}
-			class:opacity-100={isStageHovered}
-			onclick={goNext}
-			aria-label="Next item"
-			type="button"
-		>
-			<span aria-hidden="true">&#8594;</span>
-		</button>
-
 		<div
-			class="absolute bottom-8 left-8 flex items-center gap-2 text-sm tracking-[0.3em] text-white/70 uppercase max-lg:left-1/2 max-lg:-translate-x-1/2"
+			class="w-full px-[clamp(2rem,6vw,6rem)] pb-6 text-left tracking-[0.18em] uppercase lg:hidden"
 		>
-			<span>{currentIndex + 1}</span>
-			<span class="opacity-50">/</span>
-			<span>{items.length}</span>
+			<h2 class="m-0 text-[clamp(1.6rem,6vw,2.2rem)] max-lg:break-words">
+				{items[currentIndex]?.title ?? ''}
+			</h2>
+			<span class="inline-block text-[clamp(0.9rem,4vw,1.1rem)] text-white/70">
+				{items[currentIndex]?.subtitle ?? ''}
+			</span>
 		</div>
 	</section>
 </div>
