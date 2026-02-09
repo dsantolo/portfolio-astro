@@ -31,6 +31,7 @@
 	let pointerStartX = 0;
 	let pointerStartY = 0;
 	let pointerId: number | null = null;
+	let hasSwiped = false;
 
 	const clampIndex = (index: number) => {
 		if (items.length === 0) return 0;
@@ -71,11 +72,48 @@
 		pointerStartX = event.clientX;
 		pointerStartY = event.clientY;
 		pointerId = event.pointerId;
+		hasSwiped = false;
+
+		const target = event.currentTarget as HTMLElement;
+		target.setPointerCapture(event.pointerId);
+	};
+
+	const onStagePointerMove = (event: PointerEvent) => {
+		if (event.pointerType === 'mouse') return;
+		if (pointerId === null || event.pointerId !== pointerId) return;
+		if (hasSwiped) return;
+
+		const deltaX = event.clientX - pointerStartX;
+		const deltaY = event.clientY - pointerStartY;
+		const absDeltaX = Math.abs(deltaX);
+		const absDeltaY = Math.abs(deltaY);
+		const isMobileViewport = window.matchMedia('(max-width: 1024px)').matches;
+		const isSwipe =
+			isMobileViewport &&
+			absDeltaX > swipeDistanceThreshold &&
+			absDeltaX > absDeltaY * swipeBiasRatio;
+
+		if (isSwipe) {
+			if (deltaX < 0) {
+				goNext();
+			} else {
+				goPrevious();
+			}
+			hasSwiped = true;
+		}
 	};
 
 	const onStagePointerUp = (event: PointerEvent) => {
 		if (event.pointerType === 'mouse') return;
 		if (pointerId === null || event.pointerId !== pointerId) return;
+
+		const target = event.currentTarget as HTMLElement;
+		target.releasePointerCapture(event.pointerId);
+
+		if (hasSwiped) {
+			pointerId = null;
+			return;
+		}
 
 		const deltaX = event.clientX - pointerStartX;
 		const deltaY = event.clientY - pointerStartY;
@@ -104,7 +142,10 @@
 	const onStagePointerCancel = (event: PointerEvent) => {
 		if (event.pointerType === 'mouse') return;
 		if (pointerId === null || event.pointerId !== pointerId) return;
+		const target = event.currentTarget as HTMLElement;
+		target.releasePointerCapture(event.pointerId);
 		pointerId = null;
+		hasSwiped = false;
 	};
 
 	const onStageKeydown = (event: KeyboardEvent) => {
@@ -205,13 +246,14 @@
 				</button>
 			</div>
 			<div
-				class="flex h-full w-full transition-transform duration-[800ms] ease-out"
+				class="flex h-full w-full touch-pan-y transition-transform duration-[800ms] ease-out"
 				style={`transform: translateX(-${currentIndex * 100}%);`}
 				role="button"
 				aria-pressed={isStageBlurred}
 				tabindex="0"
 				onkeydown={onStageKeydown}
 				onpointerdown={onStagePointerDown}
+				onpointermove={onStagePointerMove}
 				onpointerup={onStagePointerUp}
 				onpointercancel={onStagePointerCancel}
 				ontransitionstart={onTrackTransitionStart}
@@ -222,7 +264,7 @@
 					<div class="relative h-full min-w-full" aria-hidden={index !== currentIndex}>
 						<div
 							class="absolute top-0 left-0 z-40 w-full px-[clamp(2rem,6vw,6rem)] pt-6 text-left tracking-[0.18em] uppercase opacity-0 transition-opacity duration-150 ease-out lg:hidden"
-							class:opacity-100={isStageBlurred && index === currentIndex}
+							class:opacity-100={isStageBlurred}
 						>
 							<h2 class="m-0 text-[clamp(1.6rem,6vw,2.2rem)] max-lg:break-words">
 								{item.title}
@@ -249,7 +291,7 @@
 						>
 							<div
 								class="font-twoweekend w-full max-w-none leading-[1.8] opacity-0 transition-opacity duration-150 ease-out motion-reduce:transition-none max-lg:order-3"
-								class:opacity-100={isStageBlurred && index === currentIndex}
+								class:opacity-100={isStageBlurred}
 							>
 								<p class="m-0 p-7 max-lg:p-0">
 									{item.description}
@@ -257,7 +299,7 @@
 							</div>
 							<div
 								class="pr-10 text-right tracking-[0.18em] uppercase opacity-0 transition-opacity duration-150 ease-out max-lg:hidden"
-								class:opacity-100={isStageBlurred && index === currentIndex}
+								class:opacity-100={isStageBlurred}
 							>
 								<h2 class="m-0 mb-3 text-[clamp(2.4rem,4.4vw,4.6rem)]">{item.title}</h2>
 								<span class="inline-block text-[clamp(1rem,1.6vw,1.35rem)] text-white/70">
