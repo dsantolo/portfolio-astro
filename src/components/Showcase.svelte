@@ -24,6 +24,14 @@
 	let isStageBlurred = $state(false);
 	let hasEverBlurred = $state(false);
 
+	const tapDistanceThreshold = 12;
+	const swipeDistanceThreshold = 48;
+	const swipeBiasRatio = 1.2;
+
+	let pointerStartX = 0;
+	let pointerStartY = 0;
+	let pointerId: number | null = null;
+
 	const clampIndex = (index: number) => {
 		if (items.length === 0) return 0;
 		return (index + items.length) % items.length;
@@ -59,6 +67,49 @@
 
 	const onStagePointerDown = (event: PointerEvent) => {
 		if (event.pointerType === 'mouse') return;
+
+		pointerStartX = event.clientX;
+		pointerStartY = event.clientY;
+		pointerId = event.pointerId;
+	};
+
+	const onStagePointerUp = (event: PointerEvent) => {
+		if (event.pointerType === 'mouse') return;
+		if (pointerId === null || event.pointerId !== pointerId) return;
+
+		const deltaX = event.clientX - pointerStartX;
+		const deltaY = event.clientY - pointerStartY;
+		const absDeltaX = Math.abs(deltaX);
+		const absDeltaY = Math.abs(deltaY);
+		const isTap = absDeltaX < tapDistanceThreshold && absDeltaY < tapDistanceThreshold;
+		const isSwipe =
+			window.matchMedia('(max-width: 1024px)').matches &&
+			absDeltaX > swipeDistanceThreshold &&
+			absDeltaX > absDeltaY * swipeBiasRatio;
+
+		if (isSwipe) {
+			if (deltaX < 0) {
+				goNext();
+			} else {
+				goPrevious();
+			}
+		} else if (isTap) {
+			isStageBlurred = !isStageBlurred;
+			hasEverBlurred = true;
+		}
+
+		pointerId = null;
+	};
+
+	const onStagePointerCancel = (event: PointerEvent) => {
+		if (event.pointerType === 'mouse') return;
+		if (pointerId === null || event.pointerId !== pointerId) return;
+		pointerId = null;
+	};
+
+	const onStageKeydown = (event: KeyboardEvent) => {
+		if (event.key !== 'Enter' && event.key !== ' ') return;
+		event.preventDefault();
 		isStageBlurred = !isStageBlurred;
 		hasEverBlurred = true;
 	};
@@ -88,7 +139,7 @@
 		<nav
 			class="flex w-full max-w-md flex-nowrap items-center justify-between gap-2 rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs backdrop-blur-lg sm:w-auto sm:max-w-none sm:gap-4 sm:px-5 sm:py-2.5 sm:text-sm lg:gap-6 lg:px-6 lg:py-3"
 		>
-			{#each navLinks as link}
+			{#each navLinks as link (link.href)}
 				<a
 					href={link.href}
 					class={`rounded-full px-2.5 py-1 text-white/60 transition-colors duration-150 ease-out hover:bg-white/20 hover:text-white sm:px-3 sm:py-1.5 ${
@@ -156,15 +207,22 @@
 			<div
 				class="flex h-full w-full transition-transform duration-[800ms] ease-out"
 				style={`transform: translateX(-${currentIndex * 100}%);`}
+				role="button"
+				aria-pressed={isStageBlurred}
+				tabindex="0"
+				onkeydown={onStageKeydown}
 				onpointerdown={onStagePointerDown}
+				onpointerup={onStagePointerUp}
+				onpointercancel={onStagePointerCancel}
 				ontransitionstart={onTrackTransitionStart}
 				ontransitionend={onTrackTransitionEnd}
 				ontransitioncancel={onTrackTransitionEnd}
 			>
-				{#each items as item, index}
+				{#each items as item, index (`${item.title}-${item.subtitle}`)}
 					<div class="relative h-full min-w-full" aria-hidden={index !== currentIndex}>
 						<div
-							class="absolute top-0 left-0 z-40 w-full px-[clamp(2rem,6vw,6rem)] pt-6 text-left tracking-[0.18em] uppercase lg:hidden"
+							class="absolute top-0 left-0 z-40 w-full px-[clamp(2rem,6vw,6rem)] pt-6 text-left tracking-[0.18em] uppercase opacity-0 transition-opacity duration-150 ease-out lg:hidden"
+							class:opacity-100={isStageBlurred && index === currentIndex}
 						>
 							<h2 class="m-0 text-[clamp(1.6rem,6vw,2.2rem)] max-lg:break-words">
 								{item.title}
@@ -197,7 +255,10 @@
 									{item.description}
 								</p>
 							</div>
-							<div class="pr-10 text-right tracking-[0.18em] uppercase max-lg:hidden">
+							<div
+								class="pr-10 text-right tracking-[0.18em] uppercase opacity-0 transition-opacity duration-150 ease-out max-lg:hidden"
+								class:opacity-100={isStageBlurred && index === currentIndex}
+							>
 								<h2 class="m-0 mb-3 text-[clamp(2.4rem,4.4vw,4.6rem)]">{item.title}</h2>
 								<span class="inline-block text-[clamp(1rem,1.6vw,1.35rem)] text-white/70">
 									{item.subtitle}
