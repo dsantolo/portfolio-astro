@@ -176,7 +176,7 @@
 	aria-label="Showcase"
 	aria-live="polite"
 >
-	<section class="flex items-center justify-center px-[clamp(1.5rem,5vw,6rem)] py-8">
+	<section class="flex items-start justify-center px-[clamp(1.5rem,5vw,6rem)] py-4">
 		<div class="flex flex-col items-center gap-2">
 			<div
 				class="bg-linear-60 from-gray-200 to-gray-700 bg-clip-text text-center text-xl text-transparent sm:text-2xl"
