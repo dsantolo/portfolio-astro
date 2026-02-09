@@ -117,7 +117,7 @@
 			class="flex min-h-screen flex-col items-center justify-center gap-8 py-10 md:min-h-[75vh] md:gap-10 md:py-6"
 		>
 			<h1
-				class="animate-gradient-text bg-linear-60 from-gray-200 from-85% to-gray-700 bg-clip-text text-5xl text-transparent md:text-9xl"
+				class="animate-gradient-text bg-linear-60 from-gray-200 from-85% to-gray-700 bg-clip-text text-2xl text-transparent md:text-3xl"
 			>
 				Derek Santolo
 			</h1>
@@ -131,15 +131,8 @@
 					{/each}
 				</ul>
 			</nav>
-			<a id="resume-link" href="/resume.pdf"
-				><h2
-					class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-4xl text-transparent transition-colors duration-150 ease-out hover:text-gray-200"
-				>
-					Résumé
-				</h2></a
-			>
 			<div
-				class="logos-container flex w-full items-center justify-center gap-8 px-6 md:justify-evenly md:gap-6"
+				class="logos-container grid w-full grid-cols-2 place-items-center gap-6 px-6 sm:grid-cols-4 sm:gap-4 lg:gap-6"
 			>
 				<a
 					href="https://github.com/dsantolo"
@@ -164,6 +157,17 @@
 					<LinkedInSVG
 						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12"
 					/>
+				</a>
+				<a
+					id="resume-link"
+					href="/resume.pdf"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
+				>
+					<span
+						class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-sm font-semibold text-transparent transition-colors duration-150 ease-out group-hover:text-gray-200 md:text-base"
+					>
+						Résumé
+					</span>
 				</a>
 			</div>
 		</div>
