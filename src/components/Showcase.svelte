@@ -53,6 +53,11 @@
 		if (event.key === 'ArrowRight') {
 			goNext();
 		}
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			isStageBlurred = !isStageBlurred;
+			hasEverBlurred = true;
+		}
 	};
 
 	const onStageEnter = (event: PointerEvent) => {
@@ -146,13 +151,6 @@
 		target.releasePointerCapture(event.pointerId);
 		pointerId = null;
 		hasSwiped = false;
-	};
-
-	const onStageKeydown = (event: KeyboardEvent) => {
-		if (event.key !== 'Enter' && event.key !== ' ') return;
-		event.preventDefault();
-		isStageBlurred = !isStageBlurred;
-		hasEverBlurred = true;
 	};
 
 	const onTrackTransitionStart = (event: TransitionEvent) => {
@@ -260,7 +258,6 @@
 				role="button"
 				aria-pressed={isStageBlurred}
 				tabindex="0"
-				onkeydown={onStageKeydown}
 				onpointerdown={onStagePointerDown}
 				onpointermove={onStagePointerMove}
 				onpointerup={onStagePointerUp}
