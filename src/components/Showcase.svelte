@@ -158,7 +158,9 @@
 	const onTrackTransitionStart = (event: TransitionEvent) => {
 		if (event.propertyName !== 'transform') return;
 		isTransitioning = true;
-		hasEverBlurred = true;
+		if (isStageBlurred) {
+			hasEverBlurred = true;
+		}
 	};
 
 	const onTrackTransitionEnd = (event: TransitionEvent) => {
@@ -279,11 +281,9 @@
 								alt={item.title}
 								loading="lazy"
 								class="showcase-cover h-full w-full scale-[1.02] bg-black object-contain"
-								class:showcase-cover-transitioning={isTransitioning && !isStageBlurred}
+								class:showcase-cover-transitioning={isTransitioning && isStageBlurred}
 								class:showcase-cover-hovered={isStageBlurred}
-								class:showcase-cover-unhovered={!isTransitioning &&
-									hasEverBlurred &&
-									!isStageBlurred}
+								class:showcase-cover-unhovered={hasEverBlurred && !isStageBlurred}
 							/>
 						</div>
 						<div
