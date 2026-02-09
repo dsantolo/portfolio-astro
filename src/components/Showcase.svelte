@@ -253,7 +253,7 @@
 				</button>
 			</div>
 			<div
-				class="flex h-full w-full touch-pan-y transition-transform duration-[800ms] ease-out"
+				class="flex h-full w-full touch-pan-y transition-transform duration-[800ms] ease-out-expo"
 				style={`transform: translateX(-${currentIndex * 100}%);`}
 				role="button"
 				aria-pressed={isStageBlurred}
