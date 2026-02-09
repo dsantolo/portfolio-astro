@@ -177,20 +177,27 @@
 	aria-live="polite"
 >
 	<section class="flex items-center justify-center px-[clamp(1.5rem,5vw,6rem)] py-8">
-		<nav
-			class="flex w-full max-w-md flex-nowrap items-center justify-between gap-2 rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs backdrop-blur-lg sm:w-auto sm:max-w-none sm:gap-4 sm:px-5 sm:py-2.5 sm:text-sm lg:gap-6 lg:px-6 lg:py-3"
-		>
-			{#each navLinks as link (link.href)}
-				<a
-					href={link.href}
-					class={`rounded-full px-2.5 py-1 text-white/60 transition-colors duration-150 ease-out hover:bg-white/20 hover:text-white sm:px-3 sm:py-1.5 ${
-						link.label === activeLabel ? 'bg-white/20 text-white' : ''
-					}`}
-				>
-					{link.label}
-				</a>
-			{/each}
-		</nav>
+		<div class="flex flex-col items-center gap-2">
+			<div
+				class="bg-linear-60 from-gray-200 to-gray-700 bg-clip-text text-center text-xl text-transparent sm:text-2xl"
+			>
+				DS
+			</div>
+			<nav
+				class="flex w-full max-w-md flex-nowrap items-center justify-between gap-2 rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs backdrop-blur-lg sm:w-auto sm:max-w-none sm:gap-4 sm:px-5 sm:py-2.5 sm:text-sm lg:gap-6 lg:px-6 lg:py-3"
+			>
+				{#each navLinks as link (link.href)}
+					<a
+						href={link.href}
+						class={`rounded-full px-2.5 py-1 text-white/60 transition-colors duration-150 ease-out hover:bg-white/20 hover:text-white sm:px-3 sm:py-1.5 ${
+							link.label === activeLabel ? 'bg-white/20 text-white' : ''
+						}`}
+					>
+						{link.label}
+					</a>
+				{/each}
+			</nav>
+		</div>
 	</section>
 
 	<h2
