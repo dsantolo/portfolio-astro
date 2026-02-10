@@ -207,7 +207,7 @@
 	</h2>
 
 	<section
-		class="font-twoweekend flex w-full flex-col gap-4 overflow-x-hidden lg:relative lg:block lg:h-[80vh] lg:overflow-hidden"
+		class="font-twoweekend flex w-full flex-col gap-4 overflow-x-hidden border-y-2 border-gray-700 lg:relative lg:block lg:h-[80vh] lg:overflow-hidden"
 		role="group"
 		aria-label="Showcase items"
 		aria-live="polite"
