@@ -117,12 +117,12 @@
 			class="flex min-h-screen flex-col items-center justify-center gap-8 py-10 md:min-h-[75vh] md:gap-10 md:py-6"
 		>
 			<h1
-				class="animate-gradient-text bg-linear-60 from-gray-200 from-85% to-gray-700 bg-clip-text text-2xl text-transparent md:text-3xl"
+				class="animate-gradient-text bg-linear-60 from-gray-200 from-85% to-gray-700 bg-clip-text text-2xl text-transparent md:text-3xl lg:text-5xl"
 			>
 				Derek Santolo
 			</h1>
 			<nav
-				class="w-full max-w-md rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs backdrop-blur-lg sm:w-auto sm:max-w-none sm:px-5 sm:py-2.5 sm:text-sm lg:px-6 lg:py-3"
+				class="w-full max-w-md rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs backdrop-blur-lg sm:w-auto sm:max-w-none sm:px-5 sm:py-2.5 sm:text-sm lg:px-8 lg:py-4 lg:text-lg"
 				aria-label="Primary"
 			>
 				<ul class="flex flex-nowrap items-center justify-between gap-2 sm:gap-4 lg:gap-6">
@@ -132,39 +132,39 @@
 				</ul>
 			</nav>
 			<div
-				class="logos-container grid w-full grid-cols-2 place-items-center gap-6 px-6 sm:grid-cols-4 sm:gap-4 lg:gap-6"
+				class="logos-container grid w-full grid-cols-2 place-items-center gap-6 px-6 sm:grid-cols-4 sm:gap-4 lg:gap-8"
 			>
 				<a
 					href="https://github.com/dsantolo"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24 lg:h-24 lg:w-32"
 				>
 					<GitHubSVG
-						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12"
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12 lg:h-14"
 					/>
 				</a>
 				<a
 					href="mailto:derek.santolo@gmail.com"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24 lg:h-24 lg:w-32"
 				>
 					<MailSVG
-						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out size-10 md:size-12"
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out size-10 md:size-12 lg:size-14"
 					/>
 				</a>
 				<a
 					href="https://linkedin.com/in/dereksantolo"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24 lg:h-24 lg:w-32"
 				>
 					<LinkedInSVG
-						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12"
+						className="fill-gray-700 group-hover:fill-gray-200 transition-colors duration-150 ease-out h-10 w-auto md:h-12 lg:h-14"
 					/>
 				</a>
 				<a
 					id="resume-link"
 					href="/resume.pdf"
-					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24"
+					class="group flex h-16 w-20 items-center justify-center rounded-2xl border border-white/15 bg-black/60 p-2 backdrop-blur-lg transition-colors duration-150 ease-out hover:bg-white/20 md:h-20 md:w-24 lg:h-24 lg:w-32"
 				>
 					<span
-						class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-sm font-semibold text-transparent transition-colors duration-150 ease-out group-hover:text-gray-200 md:text-base"
+						class="bg-linear-to-b from-white to-gray-700 bg-clip-text text-sm font-semibold text-transparent transition-colors duration-150 ease-out group-hover:text-gray-200 md:text-base lg:text-lg"
 					>
 						Résumé
 					</span>
