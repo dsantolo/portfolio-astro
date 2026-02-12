@@ -82,7 +82,7 @@
 {/snippet}
 
 <div
-	class={cn({
+	class={cn('w-full max-w-screen overflow-x-hidden', {
 		'opacity-0': !isMounted
 	})}
 >
