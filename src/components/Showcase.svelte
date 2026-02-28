@@ -4,6 +4,7 @@
 		subtitle: string;
 		description: string;
 		image: string;
+		objectPosition?: string;
 	};
 
 	export type ShowcaseNavLink = {
@@ -253,7 +254,7 @@
 				</button>
 			</div>
 			<div
-				class="ease-out-expo flex h-full w-full touch-pan-y transition-transform duration-[800ms] md:ease-out"
+				class="ease-out flex h-full w-full touch-pan-y transition-transform duration-[300ms]"
 				style={`transform: translateX(-${currentIndex * 100}%);`}
 				role="button"
 				aria-pressed={isStageBlurred}
@@ -284,7 +285,9 @@
 								src={item.image}
 								alt={item.title}
 								loading="lazy"
-								class="showcase-cover h-full w-full scale-[1.02] bg-black object-contain"
+								class={`showcase-cover h-full w-full scale-[1.02] bg-black object-cover ${
+									item.objectPosition ?? 'object-center'
+								}`}
 								class:showcase-cover-transitioning={isTransitioning && isStageBlurred}
 								class:showcase-cover-hovered={isStageBlurred}
 								class:showcase-cover-unhovered={hasEverBlurred && !isStageBlurred}
