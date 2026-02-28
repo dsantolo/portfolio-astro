@@ -287,6 +287,7 @@
 							<img
 								src={item.image}
 								alt={item.title}
+								loading="lazy"
 								class={`showcase-cover h-full w-full scale-[1.02] bg-black ${
 									item.objectFit ?? objectFitDefault
 								} ${item.objectPosition ?? 'object-center'}`}
@@ -360,10 +361,12 @@
 	}
 
 	.showcase-cover-hovered {
+		will-change: transform, filter;
 		animation: showcase-blur-in 150ms ease-out forwards;
 	}
 
 	.showcase-cover-transitioning {
+		will-change: transform, filter;
 		animation: showcase-blur-in 150ms ease-out forwards;
 		filter: blur(8px);
 	}
