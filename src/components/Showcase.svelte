@@ -169,27 +169,6 @@
 		if (event.propertyName !== 'transform') return;
 		isTransitioning = false;
 	};
-
-	const preloadImage = (src: string) => {
-		if (!src) return;
-		const image = new Image();
-		image.src = src;
-	};
-
-	$effect(() => {
-		if (typeof window === 'undefined') return;
-		if (items.length < 2) return;
-
-		const nextIndex = clampIndex(currentIndex + 1);
-		const previousIndex = clampIndex(currentIndex - 1);
-		const indices = new Set([nextIndex, previousIndex]);
-
-		for (const index of indices) {
-			const item = items[index];
-			if (!item?.image) continue;
-			preloadImage(item.image);
-		}
-	});
 </script>
 
 <svelte:window onkeydown={onKeydown} />
@@ -308,7 +287,6 @@
 							<img
 								src={item.image}
 								alt={item.title}
-								loading="lazy"
 								class={`showcase-cover h-full w-full scale-[1.02] bg-black ${
 									item.objectFit ?? objectFitDefault
 								} ${item.objectPosition ?? 'object-center'}`}
