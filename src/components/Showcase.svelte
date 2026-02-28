@@ -5,6 +5,7 @@
 		description: string;
 		image: string;
 		objectPosition?: string;
+		objectFit?: string;
 	};
 
 	export type ShowcaseNavLink = {
@@ -16,9 +17,11 @@
 		items?: ShowcaseItem[];
 		navLinks?: ShowcaseNavLink[];
 		activeLabel?: string;
+		objectFitDefault?: string;
 	};
 
-	let { items = [], navLinks = [], activeLabel = '' }: Props = $props();
+	let { items = [], navLinks = [], activeLabel = '', objectFitDefault = 'object-cover' }: Props =
+		$props();
 
 	let currentIndex = $state(0);
 	let isTransitioning = $state(false);
@@ -254,7 +257,7 @@
 				</button>
 			</div>
 			<div
-				class="ease-out flex h-full w-full touch-pan-y transition-transform duration-[300ms]"
+				class="flex h-full w-full touch-pan-y transition-transform duration-[300ms] ease-out"
 				style={`transform: translateX(-${currentIndex * 100}%);`}
 				role="button"
 				aria-pressed={isStageBlurred}
@@ -285,9 +288,9 @@
 								src={item.image}
 								alt={item.title}
 								loading="lazy"
-								class={`showcase-cover h-full w-full scale-[1.02] bg-black object-cover ${
-									item.objectPosition ?? 'object-center'
-								}`}
+								class={`showcase-cover h-full w-full scale-[1.02] bg-black ${
+									item.objectFit ?? objectFitDefault
+								} ${item.objectPosition ?? 'object-center'}`}
 								class:showcase-cover-transitioning={isTransitioning && isStageBlurred}
 								class:showcase-cover-hovered={isStageBlurred}
 								class:showcase-cover-unhovered={hasEverBlurred && !isStageBlurred}
