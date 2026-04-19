@@ -23,7 +23,7 @@
 		src={item.image}
 		alt={item.title}
 		loading="lazy"
-		class={`showcase-cover h-full w-full scale-[1.02] bg-black ${item.objectFit ?? objectFitDefault} ${item.objectPosition ?? 'object-center'}`}
+		class={`h-full w-full scale-[1.02] bg-black blur-none ${item.objectFit ?? objectFitDefault} ${item.objectPosition ?? 'object-center'}`}
 		class:showcase-cover-transitioning={isTransitioning && isStageBlurred}
 		class:showcase-cover-hovered={isStageBlurred}
 		class:showcase-cover-unhovered={hasEverBlurred && !isStageBlurred}
@@ -31,10 +31,6 @@
 </div>
 
 <style>
-	.showcase-cover {
-		filter: blur(0px);
-	}
-
 	.showcase-cover-hovered {
 		will-change: transform, filter;
 		animation: showcase-blur-in 150ms ease-out forwards;
