@@ -26,6 +26,22 @@ export interface LayoutProps extends TransitionProps {
   description?: string
 }
 
+// Showcase item data interface
+export interface ShowcaseItem {
+  title: string
+  subtitle: string
+  description: string
+  image: string
+  objectPosition?: string
+  objectFit?: string
+}
+
+// Showcase navigation link interface
+export interface ShowcaseNavLink {
+  label: string
+  href: string
+}
+
 // BaseHead component props interface
 export interface BaseHeadProps {
   title: string

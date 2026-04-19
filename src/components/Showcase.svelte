@@ -1,20 +1,12 @@
 <script lang="ts">
-	export type ShowcaseItem = {
-		title: string;
-		subtitle: string;
-		description: string;
-		image: string;
-		objectPosition?: string;
-		objectFit?: string;
-	};
+	import ShowcaseItemView from './ShowcaseItem.svelte';
+	import { cn } from '@/utils/cn.ts';
+	import type { ShowcaseItem as ShowcaseItemData, ShowcaseNavLink } from '@/types';
 
-	export type ShowcaseNavLink = {
-		label: string;
-		href: string;
-	};
+	export type { ShowcaseItemData as ShowcaseItem, ShowcaseNavLink };
 
 	type Props = {
-		items?: ShowcaseItem[];
+		items?: ShowcaseItemData[];
 		navLinks?: ShowcaseNavLink[];
 		activeLabel?: string;
 		objectFitDefault?: string;
@@ -27,6 +19,7 @@
 	let isTransitioning = $state(false);
 	let isStageBlurred = $state(false);
 	let hasEverBlurred = $state(false);
+	const currentItem = $derived(items[currentIndex] ?? null);
 
 	const tapDistanceThreshold = 12;
 	const swipeDistanceThreshold = 48;
@@ -219,6 +212,43 @@
 		onpointerleave={onStageLeave}
 	>
 		<div class="relative h-[78vh] w-full overflow-hidden lg:h-full">
+			{#if currentItem}
+				<div
+					class={cn(
+						'pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(110deg,rgba(0,0,0,0.66),rgba(0,0,0,0.18)_60%)] p-[clamp(2rem,6vw,6rem)] max-lg:pt-6 max-lg:pb-20',
+						{
+							'showcase-overlay-visible': isStageBlurred,
+							'showcase-overlay-hidden': hasEverBlurred && !isStageBlurred,
+							'opacity-0': !isStageBlurred && !hasEverBlurred,
+							'opacity-100': isStageBlurred
+						}
+					)}
+				>
+					<div
+						class="flex h-full flex-col justify-between gap-6 max-lg:text-left lg:grid lg:grid-cols-[7fr_3fr] lg:items-center lg:gap-[clamp(1.5rem,3vw,3rem)]"
+					>
+						<div
+							class="order-1 max-w-[min(100%,24rem)] tracking-[0.18em] uppercase lg:order-2 lg:max-w-none lg:justify-self-end lg:pr-10 lg:text-right"
+						>
+							<h2 class="m-0 text-[clamp(1.6rem,6vw,4.6rem)] max-lg:break-words">
+								{currentItem.title}
+							</h2>
+							<span
+								class="mt-2 inline-block text-[clamp(0.9rem,4vw,1.35rem)] text-white/70"
+							>
+								{currentItem.subtitle}
+							</span>
+						</div>
+						<div
+							class="font-twoweekend order-2 mt-auto w-full max-w-none leading-[1.8] lg:order-1 lg:mt-0"
+						>
+							<p class="m-0 max-w-[68ch] p-0 lg:p-7">
+								{currentItem.description}
+							</p>
+						</div>
+					</div>
+				</div>
+			{/if}
 			<div
 				class="absolute bottom-0 left-0 z-40 flex w-full items-center justify-center gap-4 px-[clamp(2rem,6vw,6rem)] pb-6 text-sm tracking-[0.3em] text-white/70 uppercase lg:hidden"
 			>
@@ -272,51 +302,13 @@
 			>
 				{#each items as item, index (`${item.title}-${item.subtitle}`)}
 					<div class="relative h-full min-w-full" aria-hidden={index !== currentIndex}>
-						<div
-							class="absolute top-0 left-0 z-40 w-full px-[clamp(2rem,6vw,6rem)] pt-6 text-left tracking-[0.18em] uppercase opacity-0 transition-opacity duration-150 ease-out lg:hidden"
-							class:opacity-100={isStageBlurred}
-						>
-							<h2 class="m-0 text-[clamp(1.6rem,6vw,2.2rem)] max-lg:break-words">
-								{item.title}
-							</h2>
-							<span class="inline-block text-[clamp(0.9rem,4vw,1.1rem)] text-white/70">
-								{item.subtitle}
-							</span>
-						</div>
-						<div class="absolute inset-0 overflow-hidden">
-							<img
-								src={item.image}
-								alt={item.title}
-								loading="lazy"
-								class={`showcase-cover h-full w-full scale-[1.02] bg-black ${
-									item.objectFit ?? objectFitDefault
-								} ${item.objectPosition ?? 'object-center'}`}
-								class:showcase-cover-transitioning={isTransitioning && isStageBlurred}
-								class:showcase-cover-hovered={isStageBlurred}
-								class:showcase-cover-unhovered={hasEverBlurred && !isStageBlurred}
-							/>
-						</div>
-						<div
-							class="relative z-20 grid h-full grid-cols-[7fr_3fr] items-center gap-[clamp(1.5rem,3vw,3rem)] bg-[linear-gradient(110deg,rgba(0,0,0,0.66),rgba(0,0,0,0.18)_60%)] p-[clamp(2rem,6vw,6rem)] max-lg:flex max-lg:flex-col max-lg:items-start max-lg:justify-center max-lg:gap-6 max-lg:pt-0 max-lg:text-left"
-						>
-							<div
-								class="font-twoweekend w-full max-w-none leading-[1.8] opacity-0 transition-opacity duration-150 ease-out motion-reduce:transition-none max-lg:order-3"
-								class:opacity-100={isStageBlurred}
-							>
-								<p class="m-0 p-7 max-lg:p-0">
-									{item.description}
-								</p>
-							</div>
-							<div
-								class="pr-10 text-right tracking-[0.18em] uppercase opacity-0 transition-opacity duration-150 ease-out max-lg:hidden"
-								class:opacity-100={isStageBlurred}
-							>
-								<h2 class="m-0 mb-3 text-[clamp(2.4rem,4.4vw,4.6rem)]">{item.title}</h2>
-								<span class="inline-block text-[clamp(1rem,1.6vw,1.35rem)] text-white/70">
-									{item.subtitle}
-								</span>
-							</div>
-						</div>
+						<ShowcaseItemView
+							{item}
+							{objectFitDefault}
+							{isStageBlurred}
+							{isTransitioning}
+							{hasEverBlurred}
+						/>
 					</div>
 				{/each}
 			</div>
@@ -356,47 +348,35 @@
 </div>
 
 <style>
-	.showcase-cover {
-		filter: blur(0px);
+	.showcase-overlay-visible {
+		animation: showcase-overlay-in 150ms ease-out forwards;
 	}
 
-	.showcase-cover-hovered {
-		will-change: transform, filter;
-		animation: showcase-blur-in 150ms ease-out forwards;
+	.showcase-overlay-hidden {
+		animation: showcase-overlay-out 150ms ease-out forwards;
 	}
 
-	.showcase-cover-transitioning {
-		will-change: transform, filter;
-		animation: showcase-blur-in 150ms ease-out forwards;
-		filter: blur(8px);
-	}
-
-	.showcase-cover-unhovered {
-		animation: showcase-blur-out 150ms ease-out forwards;
-	}
-
-	@keyframes showcase-blur-in {
+	@keyframes showcase-overlay-in {
 		from {
-			filter: blur(0px);
+			opacity: 0;
 		}
 		to {
-			filter: blur(8px);
+			opacity: 1;
 		}
 	}
 
-	@keyframes showcase-blur-out {
+	@keyframes showcase-overlay-out {
 		from {
-			filter: blur(8px);
+			opacity: 1;
 		}
 		to {
-			filter: blur(0px);
+			opacity: 0;
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.showcase-cover-hovered,
-		.showcase-cover-transitioning,
-		.showcase-cover-unhovered {
+		.showcase-overlay-visible,
+		.showcase-overlay-hidden {
 			animation: none;
 		}
 	}
